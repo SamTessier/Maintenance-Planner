@@ -1,15 +1,19 @@
 footer#main-footer {
   background-color: rgb(64, 22, 22);
-  margin-right: 0px;
+
   color: white;
   height: 55px;
   
   padding-top: 15px;
+  text-align: center;
 }
 
 body {
-  width: 90%;
   height: 500px;
+}
+
+div#banner{
+  height: 100px;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
