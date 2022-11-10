@@ -48,8 +48,8 @@ div#banner{
 
 .table {
   margin-top: 20px;
-  border-color: black;
   background-color: #ccc;
+  border-radius: 10px;
 }
 
 .switch {
@@ -78,6 +78,7 @@ div#banner{
   transition: 0.2s;
   border-style: outset;
   border-color: black;
+  border-radius: 10px;
 }
 
 .slider:before {
@@ -92,6 +93,7 @@ div#banner{
   transition: 0.2s;
   border-style: outset;
   border-color: black;
+  border-radius: 10px;
 }
 
 input:checked + .slider {
@@ -109,6 +111,7 @@ input:checked + .slider:before {
   background-color: white;
   height: 35px;
   margin-top: 13px;
+  border-radius: 10px;
   border-style: outset;
   border-color: black;
   text-align: center;
@@ -118,4 +121,5 @@ input:checked + .slider:before {
   background-color: #ccc;
   width: 70%;
   margin: auto;
+  border-radius: 10px;
 }
