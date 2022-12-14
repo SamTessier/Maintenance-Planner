@@ -1,53 +1,86 @@
-let dummyVehicleList = [
+// {
+//   id: "1",
+//   myfleet: "Vehicle #1",
+//   status: true,
+// },
+
+
+
+const vehicleList = [
+
+
   {
-    id: "1",
-    myfleet: "Vehicle #1",
-    status: true,
-  },
-  {
-    id: "2",
-    myfleet: "Vehicle #2",
-    status: false,
-  },
+    ""
+  }
+
 ];
 
-$(document).ready(function () {
-  console.log("Website Ready");
-  init();
+// function perRowClickEvent(vehicleObject) {
+//   $("#vehicle-row").click(() => {
+//     console.log(`opening vehicle row -${vehicleObject.myfleet}`);
+
+//     $("#view-vehicle").modal("show");
+//     $("p#vehicle-name").html(vehicleObject.myfleet);
+//     $("p#vehicle-status").html(vehicleObject.status);
+//   });
+// }
+
+/* 
+this belongs on row 19 below
+
+<tr id="vehicle-row-${vehicleObject.id}"> */
+
+// function createRowObject(vehicleObject) {
+//   let myTable = `
+//   <tr id="vehicle-row-${vehicleObject.id}">
+//         <td scope="row"> ${vehicleObject.myfleet} </td>
+//         <td>
+//             <input type="checkbox" id="vehicle-status-${vehicleObject.status}">
+//         </td> </tr>`;
+// }
+
+$("#add-btn").click(function () {
+  console.log("Adding Vehicle");
+  $("td.my-fleet").append($("#exampleInputVehicle").val());
+  $("#exampleModal").modal("hide");
 });
+
+
+
+
+
+
+// // HW
+// // Inside the modal, create an edit button, setting a click event
+// // When you click on the edit button it will close the current popup (.modal("hide");) and open another one (.modal("show");) with 2 text inputs (vehicle name, checkbox)
+// // Fill the values of the inputs with the vehicleObject properties (.val("value"))
+
+// function perRowSetCheckbox(vehicleObject) {
+//   $(`input#vehicle-status-${vehicleObject.id}`).prop(
+//     "checked",
+//     vehicleObject.status
+//   );
+// }
+
+function fillVehicleTable() {
+  console.log("Calling FillVT modified");
+
+  for (let i = 0; i < myTable.length; i++) {
+    let vehicleObject = myTable[i];
+    createRowObject(vehicleObject);
+    // perRowClickEvent(vehicleObject);
+    // perRowSetCheckbox(vehicleObject);
+  }
+}
+
+
 
 function init() {
   console.log("Calling Init");
-  fillVehicleTable();
+  // fillVehicleTable();
 }
 
-function fillVehicleTable() {
-  console.log("Calling FillVT");
-
-  dummyVehicleList.forEach(vehicleObject => {
-    // Template literals
-    $("#vehicle-table-body").append(`
-    <tr id="vehicle-row-${vehicleObject.id}">
-        <td scope="row"> ${vehicleObject.myfleet} </td>
-        <td> 
-            <input type="checkbox" class="" id="vehicle-status-${vehicleObject.id}">
-        </td>
-    </tr`);
-
-    $(`tr#vehicle-row-${vehicleObject.id}`).click(function() {
-        console.log(`opening vehicle row -${vehicleObject.myfleet}`);
-       
-        $("#view-vehicle").modal("show");
-
-        $("p#vehicle-name").html(vehicleObject.myfleet);
-        $("p#vehicle-status").html(vehicleObject.status);
-        
-    })
-    
-    $(`input#vehicle-status-${vehicleObject.id}`).prop("checked", vehicleObject.status);
-  
-
+$(document).ready(() => {
+  console.log("Website Ready");
+  init();
 });
-
-  
-}
