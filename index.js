@@ -25,10 +25,6 @@ const vehicleList = [
 //   });
 // }
 
-/* 
-this belongs on row 19 below
-
-<tr id="vehicle-row-${vehicleObject.id}"> */
 
 // function createRowObject(vehicleObject) {
 //   let myTable = `
