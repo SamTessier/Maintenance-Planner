@@ -6,17 +6,15 @@
 
 const vehicleList = [];
 
+function perRowClickEvent() {
+  $("vehicle-row").click(() => {
+    console.log("Opening Vehicle Row");
 
-
-// function perRowClickEvent(vehicleObject) {
-//   $("#vehicle-row").click(() => {
-//     console.log(`opening vehicle row -${vehicleObject.myfleet}`);
-
-//     $("#view-vehicle").modal("show");
-//     $("p#vehicle-name").html(vehicleObject.myfleet);
-//     $("p#vehicle-status").html(vehicleObject.status);
-//   });
-// }
+    //     $("#view-vehicle").modal("show");
+    //     $("p#vehicle-name").html(vehicleObject.myfleet);
+    //     $("p#vehicle-status").html(vehicleObject.status);
+  });
+}
 
 // function createRowObject(vehicleObject) {
 //   let myTable = `
@@ -55,23 +53,19 @@ function init() {
   // fillVehicleTable();
 }
 
-function addRig() {
-  console.log("Adding Vehicle");
-$("td.myfleet").append($("#exampleInputVehicle").val());
-}
+// function addRig() {
+//   console.log("Adding Vehicle");
+// $("td.myfleet").append($("#exampleInputVehicle").val());
+// }
 
 $(document).ready(() => {
   console.log("Website Ready");
   init();
-  
-  $("#add-btn").click(function () { 
-    console.log("Adding Vehicle");
-    addRig();
+
+  $("#add-btn").click(function () {
+    console.log("Add button clicked");
+    $("td.myfleet").append($("#exampleInputVehicle").val());
+    $("#exampleModal").hide();
   });
-
 });
-
-
-  
-
-
+s
