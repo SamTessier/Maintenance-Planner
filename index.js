@@ -57,7 +57,7 @@ function init() {
 
 function addRig() {
   console.log("Adding Vehicle");
-$("td.myfleet").append("" + $("#exampleInputVehicle").val());
+$("td.myfleet").append($("#exampleInputVehicle").val());
 }
 
 $(document).ready(() => {
