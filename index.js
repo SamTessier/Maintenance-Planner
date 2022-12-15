@@ -4,16 +4,9 @@
 //   status: true,
 // },
 
+const vehicleList = [];
 
 
-const vehicleList = [
-
-
-  {
-    ""
-  }
-
-];
 
 // function perRowClickEvent(vehicleObject) {
 //   $("#vehicle-row").click(() => {
@@ -25,7 +18,6 @@ const vehicleList = [
 //   });
 // }
 
-
 // function createRowObject(vehicleObject) {
 //   let myTable = `
 //   <tr id="vehicle-row-${vehicleObject.id}">
@@ -34,17 +26,6 @@ const vehicleList = [
 //             <input type="checkbox" id="vehicle-status-${vehicleObject.status}">
 //         </td> </tr>`;
 // }
-
-$("#add-btn").click(function () {
-  console.log("Adding Vehicle");
-  $("td.my-fleet").append($("#exampleInputVehicle").val());
-  $("#exampleModal").modal("hide");
-});
-
-
-
-
-
 
 // // HW
 // // Inside the modal, create an edit button, setting a click event
@@ -69,14 +50,28 @@ function fillVehicleTable() {
   }
 }
 
-
-
 function init() {
   console.log("Calling Init");
   // fillVehicleTable();
 }
 
+function addRig() {
+  console.log("Adding Vehicle");
+$("td.myfleet").append("" + $("#exampleInputVehicle").val());
+}
+
 $(document).ready(() => {
   console.log("Website Ready");
   init();
+  
+  $("#add-btn").click(function () { 
+    console.log("Adding Vehicle");
+    addRig();
+  });
+
 });
+
+
+  
+
+
