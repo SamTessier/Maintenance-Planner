@@ -1,56 +1,104 @@
-// {
-//   id: "1",
-//   myfleet: "Vehicle #1",
-//   status: true,
-// },
-
-const vehicleList = [];
-
-function perRowClickEvent() {
-  $("vehicle-row").click(() => {
-    console.log("Opening Vehicle Row");
-
-    //     $("#view-vehicle").modal("show");
-    //     $("p#vehicle-name").html(vehicleObject.myfleet);
-    //     $("p#vehicle-status").html(vehicleObject.status);
-  });
-}
-
-// function createRowObject(vehicleObject) {
-//   let myTable = `
-//   <tr id="vehicle-row-${vehicleObject.id}">
-//         <td scope="row"> ${vehicleObject.myfleet} </td>
-//         <td>
-//             <input type="checkbox" id="vehicle-status-${vehicleObject.status}">
-//         </td> </tr>`;
-// }
+const vehicleObjects = [
+  // Index 0
+  {
+    id: "1",
+    myfleet: "Golf",
+    status: true,
+  },
+  // Index 1
+  {
+    id: "2",
+    myfleet: "911T",
+    status: false,
+  },
+];
 
 // // HW
 // // Inside the modal, create an edit button, setting a click event
 // // When you click on the edit button it will close the current popup (.modal("hide");) and open another one (.modal("show");) with 2 text inputs (vehicle name, checkbox)
 // // Fill the values of the inputs with the vehicleObject properties (.val("value"))
 
-// function perRowSetCheckbox(vehicleObject) {
-//   $(`input#vehicle-status-${vehicleObject.id}`).prop(
-//     "checked",
-//     vehicleObject.status
-//   );
-// }
+function closeModal() {
+  console.log("calling closemodal");
+$("button#closeModal").click(function () {
+$("div.modal").hide();
+
+});
+}
+
+function perRowSetCheckbox(vehicleObject) {
+  $(`input#vehicle-status-${vehicleObject.id}`).prop(
+    "checked",
+    vehicleObject.status
+  );
+}
+
+function perRowViewPropertiesClickEvent(vehicleObject) {
+  $(`button#vehicle-view-${vehicleObject.id}`).click(function () {
+    console.log(`opening vehicle row `, vehicleObject);
+
+    $("#view-vehicle-modal").show();
+    
+    
+    $("p#vehicle-status").html(vehicleObject.status);
+
+    for (const [key, value] of Object.entries(vehicleObject)) {
+      $("ul#vehicle-property-list").append(`
+      <li> <strong> ${key} : </strong> <span> ${value} </span> </li>
+      `);
+    }
+  });
+}
+
+
+function perRowEditPropertiesClickEvent(vehicleObject) {
+  $(`button#vehicle-edit-${vehicleObject.id}`).click(function () {
+    console.log(`opening vehicle edit `, vehicleObject);
+
+    $("#edit-vehicle-modal").show();
+    
+    
+  });
+}
 
 function fillVehicleTable() {
   console.log("Calling FillVT modified");
 
-  for (let i = 0; i < myTable.length; i++) {
-    let vehicleObject = myTable[i];
+  for (let index = 0; index < vehicleObjects.length; index++) {
+    let vehicleObject = vehicleObjects[index];
     createRowObject(vehicleObject);
-    // perRowClickEvent(vehicleObject);
-    // perRowSetCheckbox(vehicleObject);
+    linkCheckBox(vehicleObject);
+    perRowViewPropertiesClickEvent(vehicleObject);
+    perRowEditPropertiesClickEvent(vehicleObject);
+    perRowSetCheckbox(vehicleObject);
   }
 }
 
+function linkCheckBox(vehicleObject) {
+  $(`input#vehicle-status-${vehicleObject.id}`).prop(
+    "checked",
+    vehicleObject.status
+  );
+}
+
+function createRowObject(vehicleObject) {
+  let rowHtmlStr = `
+      <tr id="vehicle-row-${vehicleObject.id}">
+        <td > ${vehicleObject.myfleet} </td>
+        <td >
+            <input type="checkbox" id="vehicle-status-${vehicleObject.id}" >
+        </td> 
+        <td> <button id="vehicle-view-${vehicleObject.id}">View </button>
+        <td> <button id="vehicle-edit-${vehicleObject.id}">Edit </button>
+      </tr>`;
+  $("#vehicle-table-body").append(rowHtmlStr);
+}
+
+
+
 function init() {
   console.log("Calling Init");
-  // fillVehicleTable();
+  fillVehicleTable();
 }
 
 // function addRig() {
@@ -67,5 +115,10 @@ $(document).ready(() => {
     $("td.myfleet").append($("#exampleInputVehicle").val());
     $("#exampleModal").hide();
   });
+
+  //   works in $(document).ready(() but not as its own function - scripting? init works
+
+  // $("tr").click(() => {
+  //   console.log("Opening Vehicle Row");
+  // });
 });
-s

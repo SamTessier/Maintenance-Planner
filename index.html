@@ -140,8 +140,14 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button  id="add-btn" type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
-              data-target="#work-order-modal">
+              <button
+                id="add-btn"
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+                data-toggle="modal"
+                data-target="#work-order-modal"
+              >
                 Add to My Fleet
               </button>
             </div>
@@ -154,7 +160,12 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -162,7 +173,11 @@
               <p>Modal body text goes here.</p>
             </div>
             <div class="modal-footer">
-              <button  id="status-btn" type="checkbox" data-dismiss="modal"></button>
+              <button
+                id="status-btn"
+                type="checkbox"
+                data-dismiss="modal"
+              ></button>
             </div>
           </div>
         </div>
@@ -176,14 +191,75 @@
               <th scope="col">Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="vehicle-row">
-              <td class="myfleet"></td>
-              <td></td>
-            </tr>
+          <tbody id="vehicle-table-body">
+            <!--Inject rows from JQuery-->
           </tbody>
         </table>
       </div>
     </section>
+
+    <div id="view-vehicle-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">View Properties</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul id="vehicle-property-list">
+              <!-- insert list entries automatically from Jquery-->
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="edit-vehicle-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Properties</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">
+              Edit Properties
+            </button>
+            <button
+              id="closeModal"
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
