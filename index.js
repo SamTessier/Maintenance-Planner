@@ -20,10 +20,9 @@ const vehicleObjects = [
 
 function closeModal() {
   console.log("calling closemodal");
-$("button#closeModal").click(function () {
-$("div.modal").hide();
-
-});
+  $("button#close-modal").click(function () {
+    $(this).hide("#edit-vehicle-modal");
+  });
 }
 
 function perRowSetCheckbox(vehicleObject) {
@@ -38,8 +37,7 @@ function perRowViewPropertiesClickEvent(vehicleObject) {
     console.log(`opening vehicle row `, vehicleObject);
 
     $("#view-vehicle-modal").show();
-    
-    
+
     $("p#vehicle-status").html(vehicleObject.status);
 
     for (const [key, value] of Object.entries(vehicleObject)) {
@@ -47,17 +45,20 @@ function perRowViewPropertiesClickEvent(vehicleObject) {
       <li> <strong> ${key} : </strong> <span> ${value} </span> </li>
       `);
     }
+    $("button#close-view-modal").click(function () {
+      $("#view-vehicle-modal").hide();
+    });
   });
 }
-
 
 function perRowEditPropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-edit-${vehicleObject.id}`).click(function () {
     console.log(`opening vehicle edit `, vehicleObject);
 
     $("#edit-vehicle-modal").show();
-    
-    
+    $("button#close-edit-modal").click(function () {
+      $("#edit-vehicle-modal").hide();
+    });
   });
 }
 
@@ -93,8 +94,6 @@ function createRowObject(vehicleObject) {
       </tr>`;
   $("#vehicle-table-body").append(rowHtmlStr);
 }
-
-
 
 function init() {
   console.log("Calling Init");

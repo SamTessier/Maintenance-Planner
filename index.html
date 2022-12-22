@@ -203,14 +203,9 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">View Properties</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
+            
+         
+            
           </div>
           <div class="modal-body">
             <ul id="vehicle-property-list">
@@ -219,9 +214,10 @@
           </div>
           <div class="modal-footer">
             <button
+              id="close-view-modal"
               type="button"
               class="btn btn-secondary"
-              data-dismiss="modal"
+              
             >
               Close
             </button>
@@ -235,26 +231,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Edit Properties</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
+      
           </div>
           <div class="modal-body"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">
-              Edit Properties
-            </button>
-            <button
-              id="closeModal"
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-dark">Edit Properties</button>
+            <button id="close-edit-modal" type="button" class="btn btn-dark">
               Close
             </button>
           </div>
