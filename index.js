@@ -106,3 +106,4 @@ $(document).ready(() => {
     $("td.myfleet").append($("#exampleInputVehicle").val());
     $("#exampleModal").hide();
   });
+});
