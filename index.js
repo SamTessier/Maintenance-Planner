@@ -1,11 +1,11 @@
 const vehicleObjects = [
-  // Index 0
+
   {
     id: "1",
     myfleet: "Golf",
     status: true,
   },
-  // Index 1
+
   {
     id: "2",
     myfleet: "911T",
@@ -13,10 +13,6 @@ const vehicleObjects = [
   },
 ];
 
-// // HW
-// // Inside the modal, create an edit button, setting a click event
-// // When you click on the edit button it will close the current popup (.modal("hide");) and open another one (.modal("show");) with 2 text inputs (vehicle name, checkbox)
-// // Fill the values of the inputs with the vehicleObject properties (.val("value"))
 
 function closeModal() {
   console.log("calling closemodal");
@@ -100,10 +96,6 @@ function init() {
   fillVehicleTable();
 }
 
-// function addRig() {
-//   console.log("Adding Vehicle");
-// $("td.myfleet").append($("#exampleInputVehicle").val());
-// }
 
 $(document).ready(() => {
   console.log("Website Ready");
@@ -114,10 +106,3 @@ $(document).ready(() => {
     $("td.myfleet").append($("#exampleInputVehicle").val());
     $("#exampleModal").hide();
   });
-
-  //   works in $(document).ready(() but not as its own function - scripting? init works
-
-  // $("tr").click(() => {
-  //   console.log("Opening Vehicle Row");
-  // });
-});
