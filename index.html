@@ -91,12 +91,11 @@
       <div class="container"></div>
 
       <button
+        id="new-vehicle-input"
         type="button"
         class="btn btn-secondary btn-outline-light"
-        data-toggle="modal"
-        data-target="#exampleModal"
       >
-        Get Started
+        Add Vehicle
       </button>
 
       <div
@@ -205,16 +204,14 @@
             <h5 class="modal-title">View Properties</h5>
           </div>
           <div class="modal-body">
-            <ul id="vehicle-property-list">
+            <ul id="view-modal-vehicle-property-list">
               <!-- insert list entries automatically from Jquery-->
             </ul>
           </div>
           <div class="modal-footer">
-            <button
-              id="create-work-order"
-              type="button"
-              class="btn btn-dark"
-            >Create Work Order</button>
+            <button id="create-work-order" type="button" class="btn btn-dark">
+              Create Work Order
+            </button>
             <button id="close-view-modal" type="button" class="btn btn-dark">
               Close
             </button>
@@ -230,19 +227,13 @@
             <h5 class="modal-title">Edit Properties</h5>
           </div>
           <div class="modal-body"></div>
-          <input type="text" placeholder="Enter ID" class="align-self-center" />
-          <input
-            type="text"
-            placeholder="Enter Vehicle Name"
-            class="align-self-center"
-          />
-          <input
-            type="checkbox"
-            placeholder="Is the vehicle In Service?"
-            class="align-self-center"
-          />
+          <ul id="edit-modal-vehicle-property-list">
+            <!-- insert list entries automatically from Jquery-->
+          </ul>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark">Edit Properties</button>
+            <button id="edit-properties-btn" type="button" class="btn btn-dark">
+              Edit Properties
+            </button>
             <button id="close-edit-modal" type="button" class="btn btn-dark">
               Close
             </button>
@@ -252,3 +243,4 @@
     </div>
   </body>
 </html>
+
