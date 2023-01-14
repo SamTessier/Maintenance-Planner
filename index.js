@@ -102,8 +102,8 @@ function linkCheckBox(vehicleObject) {
 
 function createVehicle(){
   let id = $("input#add-vehicle-id");
-  let id = $("input#add-vehicle-id");
-  let id = $("input#add-vehicle-id");
+  let myfleet = $("input#add-vehicle-name");
+  let status = $("input#add-vehicle-status");
 
   //Add vehicle object to array logic
 
@@ -112,7 +112,7 @@ function createVehicle(){
 
 
 function createRowObjectEvent() {
-  $("#new-vehicle-input").click(function () {
+  $("#add-properties-btn").click(function () {
     console.log("Add button clicked");
     let vehicleObject = {
       id: "",
@@ -120,10 +120,10 @@ function createRowObjectEvent() {
       status: "",
     };
 
-    vehicleObject.id = prompt("Please enter ID");
-    vehicleObject.myfleet = prompt("Please enter Vehicle Name");
-    let strStatus = prompt("Please enter Status (y/n)"); //returns a string.
-    vehicleObject.status = strStatus.toLowerCase() == "y" ? true : false;
+    // vehicleObject.id = prompt("Please enter ID");
+    // vehicleObject.myfleet = prompt("Please enter Vehicle Name");
+    // let strStatus = prompt("Please enter Status (y/n)"); //returns a string.
+    // vehicleObject.status = strStatus.toLowerCase() == "y" ? true : false;
 
     vehicleObjects.push(vehicleObject);
 
@@ -153,7 +153,7 @@ function init() {
   addModalEvents();
   editModalEvents();
   viewModalEvents();
-  // createRowObjectEvent();
+  createRowObjectEvent();
 
   // fillVehicleTable();
 }
