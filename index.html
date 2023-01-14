@@ -98,56 +98,34 @@
         Add Vehicle
       </button>
 
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+      <div id="add-vehicle-modal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
-          <div class="modal-content modal-dialog-centered">
+          <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-dark" id="exampleModalLabel">
-                Start by entering your first vehicle.
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <h5 class="modal-title">Create Vehicle</h5>
             </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleInputVehicle"
-                    aria-describedby="formHelp"
-                    placeholder="Enter vehicle"
-                  />
-                  <small id="formHelp" class="form-text text-muted"
-                    >You can use a unit number, license plate number, or
-                    nickname.</small
-                  >
-                </div>
-              </form>
+            <div class="modal-body"></div>
+
+            <div class="p-5">
+              <label for="exampleFormControlInput1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="add-vehicle-id"
+                placeholder="Vehicle-12356"
+              />
             </div>
+
             <div class="modal-footer">
               <button
-                id="add-btn"
+                id="add-properties-btn"
                 type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#work-order-modal"
+                class="btn btn-dark"
               >
-                Add to My Fleet
+                Create Vehicle
+              </button>
+              <button id="close-add-modal" type="button" class="btn btn-dark">
+                Close
               </button>
             </div>
           </div>
@@ -243,4 +221,3 @@
     </div>
   </body>
 </html>
-

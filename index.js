@@ -17,6 +17,20 @@ function editModalEvents() {
   });
 }
 
+function addModalEvents() {
+  $("button#close-add-modal").click(function () {
+    $("#add-vehicle-modal").hide();
+  });
+
+  $(`button#new-vehicle-input`).click(function () {
+    $("#add-vehicle-modal").show();
+  });
+
+  $(`button#add-properties-btn`).click(function () {
+    createVehicle();
+  });
+}
+
 function viewModalEvents() {
   $("button#close-view-modal").click(function () {
     $("#view-vehicle-modal").hide();
@@ -86,6 +100,17 @@ function linkCheckBox(vehicleObject) {
   );
 }
 
+function createVehicle(){
+  let id = $("input#add-vehicle-id");
+  let id = $("input#add-vehicle-id");
+  let id = $("input#add-vehicle-id");
+
+  //Add vehicle object to array logic
+
+  $("#add-vehicle-modal").show();
+}
+
+
 function createRowObjectEvent() {
   $("#new-vehicle-input").click(function () {
     console.log("Add button clicked");
@@ -110,6 +135,7 @@ function createRowObjectEvent() {
         </td> 
         <td> <button id="vehicle-view-${vehicleObject.id}">View </button>
         <td> <button id="vehicle-edit-${vehicleObject.id}">Edit </button>
+        <td> <button id="vehicle-delete-${vehicleObject.id}">Delete </button>
       </tr>`;
     $("#vehicle-table-body").append(rowHtmlStr);
 
@@ -118,15 +144,16 @@ function createRowObjectEvent() {
     perRowEditPropertiesClickEvent(vehicleObject);
     perRowSetCheckbox(vehicleObject);
 
-    console.log("Array list objects", vehicleObjects)
+    console.log("Array list objects", vehicleObjects);
   });
 }
 
 function init() {
   console.log("Initializing Events / Asynchrnous operations");
+  addModalEvents();
   editModalEvents();
   viewModalEvents();
-  createRowObjectEvent();
+  // createRowObjectEvent();
 
   // fillVehicleTable();
 }
@@ -136,19 +163,17 @@ $(document).ready(() => {
   init();
 });
 
-
 // save into array
 // once you edit, find obj based on id, delete it, insert in place
 
-function findNReplace(objIdToReplace, newId, newName, newStatus){
-  vehicleObjects.forEach(function(objAtIndex, index) {
-    if (objAtIndex["id"] == objIdToReplace){
+function findNReplace(objIdToReplace, newId, newName, newStatus) {
+  vehicleObjects.forEach(function (objAtIndex, index) {
+    if (objAtIndex["id"] == objIdToReplace) {
       vehicleObjects[index] = {
         id: newId,
         myfleet: newName,
         status: newStatus,
-
-      }
+      };
     }
   });
 
