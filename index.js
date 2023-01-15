@@ -26,6 +26,23 @@ function addModalEvents() {
     $("#add-vehicle-modal").show();
   });
 
+// start of new modal system
+
+
+  $(`button#new-vehicle-input`).click(function () {
+    $("#add-vehicle-modal").show();
+  });
+
+  $(`button#new-vehicle-input`).click(function () {
+    $("#add-vehicle-modal").show();
+  });
+
+
+
+// end of new modal system
+
+
+
   $(`button#add-properties-btn`).click(function () {
     createVehicle();
   });
