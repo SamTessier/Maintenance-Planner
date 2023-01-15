@@ -1,14 +1,5 @@
 var vehicleObjects = [
-  // {
-  //   id: "1",
-  //   myfleet: "Golf",
-  //   status: true,
-  // },
-  // {
-  //   id: "2",
-  //   myfleet: "911T",
-  //   status: false,
-  // },
+
 ];
 
 function editModalEvents() {
@@ -20,6 +11,8 @@ function editModalEvents() {
 function addModalEvents() {
   $("button#close-add-modal").click(function () {
     $("#add-vehicle-modal").hide();
+    $("#add-vehicle-name-modal").hide();
+    $("#add-vehicle-status-modal").hide();
   });
 
   $(`button#new-vehicle-input`).click(function () {
@@ -29,12 +22,16 @@ function addModalEvents() {
 // start of new modal system
 
 
-  $(`button#new-vehicle-input`).click(function () {
-    $("#add-vehicle-modal").show();
+  $(`button#next-value-input-btn-id`).click(function () {
+    $("#add-vehicle-modal").hide();
+    $("#add-vehicle-name-modal").show();
+;
+
   });
 
-  $(`button#new-vehicle-input`).click(function () {
-    $("#add-vehicle-modal").show();
+  $(`button#next-value-input-btn-myfleet`).click(function () {
+    $("#add-vehicle-name-modal").hide();
+    $("#add-vehicle-status-modal").show();
   });
 
 
