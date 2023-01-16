@@ -9,8 +9,6 @@ function editModalEvents() {
 function addModalEvents() {
   $("button#close-add-modal").click(function () {
     $("#add-vehicle-modal").hide();
-    //   $("#add-vehicle-name-modal").hide();
-    //   $("#add-vehicle-status-modal").hide();
   });
 
   $("button#new-vehicle-input").click(function () {
@@ -19,6 +17,7 @@ function addModalEvents() {
 
   $("button#add-properties-btn").click(function () {
     createRowObjectEvent();
+    $("#add-vehicle-modal").hide();
   });
 }
 
@@ -28,12 +27,12 @@ function viewModalEvents() {
   });
 }
 
-function perRowSetCheckbox(vehicleObject) {
-  $(`input#vehicle-status-${vehicleObject.id}`).prop(
-    "checked",
-    vehicleObject.vStatus
-  );
-}
+// function perRowSetCheckbox(vehicleObject) {
+//   $(`input#vehicle-status-${vehicleObject.id}`).prop(
+//     "checked",
+//     vehicleObject.vStatus
+//   );
+// }
 
 function perRowViewPropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-view-${vehicleObject.id}`).click(function () {
@@ -80,7 +79,7 @@ function fillVehicleTable() {
     linkCheckBox(vehicleObject);
     perRowViewPropertiesClickEvent(vehicleObject);
     perRowEditPropertiesClickEvent(vehicleObject);
-    perRowSetCheckbox(vehicleObject);
+    // perRowSetCheckbox(vehicleObject);
   }
 }
 
@@ -91,20 +90,15 @@ function linkCheckBox(vehicleObject) {
   );
 }
 
-// function createVehicle() {
-//  //Add vehicle object to array logic
-//   $("#add-vehicle-modal").show();
-// }
-
 function createRowObjectEvent() {
-  $("button#add-properties-btn").click(function () {
+
     let vehicleObject = {};
     let id = $("input#add-vehicle-id").val();
     let myfleet = $("input#add-vehicle-name").val();
-    let status = $("input#add-vehicle-status").is(":checked");
-    vehicleObject["id"] = id;
-    vehicleObject["myfleet"] = myfleet;
-    vehicleObject["status"] = status;
+    let vStatus = $("input#add-vehicle-status").is(":checked");
+    vehicleObject.id = id;
+    vehicleObject.myfleet = myfleet;
+    vehicleObject.vStatus = vStatus;
     console.log(vehicleObject);
 
     let rowHtmlStr = `
@@ -118,14 +112,14 @@ function createRowObjectEvent() {
         <td> <button id="vehicle-delete-${vehicleObject.id}">Delete </button>
       </tr>`;
     $("#vehicle-table-body").append(rowHtmlStr);
-
+$("n")
     linkCheckBox(vehicleObject);
     perRowViewPropertiesClickEvent(vehicleObject);
     perRowEditPropertiesClickEvent(vehicleObject);
     // perRowSetCheckbox(vehicleObject);
 
     console.log("Array list objects", vehicleObjects);
-  });
+  
 }
 
 function init() {
@@ -133,8 +127,6 @@ function init() {
   addModalEvents();
   editModalEvents();
   viewModalEvents();
-  createRowObjectEvent();
-
   fillVehicleTable();
 }
 
