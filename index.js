@@ -17,7 +17,6 @@ function addModalEvents() {
     $("#add-vehicle-modal").show();
   });
 
-
   $("button#add-properties-btn").click(function () {
     createRowObjectEvent();
   });
@@ -94,30 +93,19 @@ function linkCheckBox(vehicleObject) {
 
 // function createVehicle() {
 //  //Add vehicle object to array logic
-
-
-
-
-
 //   $("#add-vehicle-modal").show();
 // }
 
 function createRowObjectEvent() {
-  $("#add-properties-btn").click(function () {
-    console.log("Add button clicked");
-    
-      let vehicleObject = {  };
-      $("input").each(function(){
-          vehicleObject[this.id] = $(this).val();
-      });
-    
-    // vehicleObject.id = $("input#add-vehicle-id");
-    // vehicleObject.myfleet = $("input#add-vehicle-name");
-
-    // let strStatus = prompt("Please enter Status (y/n)"); //returns a string.
-    // vehicleObject.vStatus == "" ? true : false;
-
-    vehicleObjects.push(vehicleObject);
+  $("button#add-properties-btn").click(function () {
+    let vehicleObject = {};
+    let id = $("input#add-vehicle-id").val();
+    let myfleet = $("input#add-vehicle-name").val();
+    let status = $("input#add-vehicle-status").is(":checked");
+    vehicleObject["id"] = id;
+    vehicleObject["myfleet"] = myfleet;
+    vehicleObject["status"] = status;
+    console.log(vehicleObject);
 
     let rowHtmlStr = `
       <tr id="vehicle-row-${vehicleObject.id}">
@@ -134,7 +122,7 @@ function createRowObjectEvent() {
     linkCheckBox(vehicleObject);
     perRowViewPropertiesClickEvent(vehicleObject);
     perRowEditPropertiesClickEvent(vehicleObject);
-    perRowSetCheckbox(vehicleObject);
+    // perRowSetCheckbox(vehicleObject);
 
     console.log("Array list objects", vehicleObjects);
   });
