@@ -1,6 +1,4 @@
-var vehicleObjects = [
-
-];
+var vehicleObjects = [];
 
 function editModalEvents() {
   $("button#close-edit-modal").click(function () {
@@ -11,37 +9,25 @@ function editModalEvents() {
 function addModalEvents() {
   $("button#close-add-modal").click(function () {
     $("#add-vehicle-modal").hide();
-    $("#add-vehicle-name-modal").hide();
-    $("#add-vehicle-status-modal").hide();
+    //   $("#add-vehicle-name-modal").hide();
+    //   $("#add-vehicle-status-modal").hide();
   });
 
-  $(`button#new-vehicle-input`).click(function () {
+  $("button#new-vehicle-input").click(function () {
     $("#add-vehicle-modal").show();
   });
 
-// start of new modal system
+  // $(`button#next-value-input-btn-id`).click(function () {
+  //   $("#add-vehicle-modal").hide();
+  //   $("#add-vehicle-name-modal").show();
+  // });
 
+  // $(`button#next-value-input-btn-myfleet`).click(function () {
+  //   $("#add-vehicle-name-modal").hide();
+  //   $("#add-vehicle-status-modal").show();
 
-  $(`button#next-value-input-btn-id`).click(function () {
-    $("#add-vehicle-modal").hide();
-    $("#add-vehicle-name-modal").show();
-;
-
-  });
-
-  $(`button#next-value-input-btn-myfleet`).click(function () {
-    $("#add-vehicle-name-modal").hide();
-    $("#add-vehicle-status-modal").show();
-  });
-
-
-
-// end of new modal system
-
-
-
-  $(`button#add-properties-btn`).click(function () {
-    createVehicle();
+  $("button#add-properties-btn").click(function () {
+    createRowObjectEvent();
   });
 }
 
@@ -94,18 +80,18 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
   });
 }
 
-// function fillVehicleTable() {
-//   console.log("Calling FillVT modified");
+function fillVehicleTable() {
+  console.log("Calling FillVT modified");
 
-//   for (let index = 0; index < vehicleObjects.length; index++) {
-//     let vehicleObject = vehicleObjects[index];
+  for (let index = 0; index < vehicleObjects.length; index++) {
+    let vehicleObject = vehicleObjects[index];
 
-//     linkCheckBox(vehicleObject);
-//     perRowViewPropertiesClickEvent(vehicleObject);
-//     perRowEditPropertiesClickEvent(vehicleObject);
-//     perRowSetCheckbox(vehicleObject);
-//   }
-// }
+    linkCheckBox(vehicleObject);
+    perRowViewPropertiesClickEvent(vehicleObject);
+    perRowEditPropertiesClickEvent(vehicleObject);
+    perRowSetCheckbox(vehicleObject);
+  }
+}
 
 function linkCheckBox(vehicleObject) {
   $(`input#vehicle-status-${vehicleObject.id}`).prop(
@@ -114,30 +100,20 @@ function linkCheckBox(vehicleObject) {
   );
 }
 
-function createVehicle(){
-  let id = $("input#add-vehicle-id");
-  let myfleet = $("input#add-vehicle-name");
-  let status = $("input#add-vehicle-status");
-
-  //Add vehicle object to array logic
+function createVehicle() {
+  //   //Add vehicle object to array logic
 
   $("#add-vehicle-modal").show();
 }
 
-
 function createRowObjectEvent() {
   $("#add-properties-btn").click(function () {
     console.log("Add button clicked");
-    let vehicleObject = {
-      id: "",
-      myfleet: "",
-      status: "",
-    };
 
-    // vehicleObject.id = prompt("Please enter ID");
-    // vehicleObject.myfleet = prompt("Please enter Vehicle Name");
-    // let strStatus = prompt("Please enter Status (y/n)"); //returns a string.
-    // vehicleObject.status = strStatus.toLowerCase() == "y" ? true : false;
+    vehicleObject.id = $("input#add-vehicle-id").value();
+    vehicleObject.myfleet = $("input#add-vehicle-name").value();
+
+    vehicleObject.status = strStatus.toLowerCase() == "y" ? true : false;
 
     vehicleObjects.push(vehicleObject);
 
@@ -167,9 +143,9 @@ function init() {
   addModalEvents();
   editModalEvents();
   viewModalEvents();
-  createRowObjectEvent();
+  // createRowObjectEvent();
 
-  // fillVehicleTable();
+  fillVehicleTable();
 }
 
 $(document).ready(() => {

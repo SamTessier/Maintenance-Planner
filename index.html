@@ -108,21 +108,38 @@
 
             <div class="p-5">
               <input
-                type="email"
-                class="form-control"
+                type="text"
+ 
                 id="add-vehicle-id"
                 placeholder="Vehicle ID"
               />
             </div>
 
+            <div class="p-5">
+              <input
+                type="text"
+         
+                id="add-vehicle-id"
+                placeholder="Vehicle Name"
+              />
+            </div>
+
+            <div class="p-5">
+              <input
+                type="checkbox"
+      
+                id="add-vehicle-status"
+               
+              />
+            </div>
+
             <div class="modal-footer">
- 
               <button
-                id="next-value-input-btn-id"
+                id="add-properties-btn"
                 type="button"
                 class="btn btn-dark"
               >
-                Next
+                Create Vehicle
               </button>
 
               <button id="close-add-modal" type="button" class="btn btn-dark">
@@ -132,7 +149,7 @@
           </div>
         </div>
       </div>
-
+      <!-- 
       <div id="add-vehicle-name-modal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -142,23 +159,23 @@
             <div class="modal-body"></div>
 
             <div class="p-5">
-              <input
+
+              <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+                Name: <input type="text" name="fname">
+                <input type="submit" value="Submit">
+                </form>
+
+               <input
                 type="email"
                 class="form-control"
                 id="add-vehicle-id"
                 placeholder="Vehicle Name"
               />
-            </div>
+            </div> 
 
             <div class="modal-footer">
         
-              <button
-                id="next-value-input-btn-myfleet"
-                type="button"
-                class="btn btn-dark"
-              >
-                Next
-              </button>
+     
 
               <button id="close-add-modal" type="button" class="btn btn-dark">
                 Close
@@ -166,9 +183,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
-      <div id="add-vehicle-status-modal" class="modal" tabindex="-1" role="dialog">
+       <div id="add-vehicle-status-modal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -177,6 +194,10 @@
             <div class="modal-body"></div>
 
             <div class="p-5">
+
+
+
+
               <input
                 type="checkbox"
                 class="form-control"
@@ -200,7 +221,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="modal" id="work-order-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
