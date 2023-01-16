@@ -17,14 +17,6 @@ function addModalEvents() {
     $("#add-vehicle-modal").show();
   });
 
-  // $(`button#next-value-input-btn-id`).click(function () {
-  //   $("#add-vehicle-modal").hide();
-  //   $("#add-vehicle-name-modal").show();
-  // });
-
-  // $(`button#next-value-input-btn-myfleet`).click(function () {
-  //   $("#add-vehicle-name-modal").hide();
-  //   $("#add-vehicle-status-modal").show();
 
   $("button#add-properties-btn").click(function () {
     createRowObjectEvent();
@@ -40,7 +32,7 @@ function viewModalEvents() {
 function perRowSetCheckbox(vehicleObject) {
   $(`input#vehicle-status-${vehicleObject.id}`).prop(
     "checked",
-    vehicleObject.status
+    vehicleObject.vStatus
   );
 }
 
@@ -96,24 +88,34 @@ function fillVehicleTable() {
 function linkCheckBox(vehicleObject) {
   $(`input#vehicle-status-${vehicleObject.id}`).prop(
     "checked",
-    vehicleObject.status
+    vehicleObject.vStatus
   );
 }
 
-function createVehicle() {
-  //   //Add vehicle object to array logic
+// function createVehicle() {
+//  //Add vehicle object to array logic
 
-  $("#add-vehicle-modal").show();
-}
+
+
+
+
+//   $("#add-vehicle-modal").show();
+// }
 
 function createRowObjectEvent() {
   $("#add-properties-btn").click(function () {
     console.log("Add button clicked");
+    
+      let vehicleObject = {  };
+      $("input").each(function(){
+          vehicleObject[this.id] = $(this).val();
+      });
+    
+    // vehicleObject.id = $("input#add-vehicle-id");
+    // vehicleObject.myfleet = $("input#add-vehicle-name");
 
-    vehicleObject.id = $("input#add-vehicle-id").value();
-    vehicleObject.myfleet = $("input#add-vehicle-name").value();
-
-    vehicleObject.status = strStatus.toLowerCase() == "y" ? true : false;
+    // let strStatus = prompt("Please enter Status (y/n)"); //returns a string.
+    // vehicleObject.vStatus == "" ? true : false;
 
     vehicleObjects.push(vehicleObject);
 
@@ -143,7 +145,7 @@ function init() {
   addModalEvents();
   editModalEvents();
   viewModalEvents();
-  // createRowObjectEvent();
+  createRowObjectEvent();
 
   fillVehicleTable();
 }
@@ -162,7 +164,7 @@ function findNReplace(objIdToReplace, newId, newName, newStatus) {
       vehicleObjects[index] = {
         id: newId,
         myfleet: newName,
-        status: newStatus,
+        vStatus: newStatus,
       };
     }
   });

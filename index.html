@@ -107,40 +107,18 @@
             <div class="modal-body"></div>
 
             <div class="p-5">
-              <input
-                type="text"
- 
-                id="add-vehicle-id"
-                placeholder="Vehicle ID"
-              />
-            </div>
+            <form id="frm1">
+              Vehicle ID: <input type="text" id="add-vehicle-id"  value=""><br>
+              Vehicle Name: <input type="text" id="add-vehicle-name"  value=""><br>
+              Is the Vehicle In Service? <input type="checkbox" id="add-vehicle-status" name=""><br>
+              <input id="add-properties-btn"
+              
+              class="btn btn-dark">
+        
+            
+          </form>
+        </div>
 
-            <div class="p-5">
-              <input
-                type="text"
-         
-                id="add-vehicle-id"
-                placeholder="Vehicle Name"
-              />
-            </div>
-
-            <div class="p-5">
-              <input
-                type="checkbox"
-      
-                id="add-vehicle-status"
-               
-              />
-            </div>
-
-            <div class="modal-footer">
-              <button
-                id="add-properties-btn"
-                type="button"
-                class="btn btn-dark"
-              >
-                Create Vehicle
-              </button>
 
               <button id="close-add-modal" type="button" class="btn btn-dark">
                 Close
@@ -149,80 +127,6 @@
           </div>
         </div>
       </div>
-      <!-- 
-      <div id="add-vehicle-name-modal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Create Vehicle</h5>
-            </div>
-            <div class="modal-body"></div>
-
-            <div class="p-5">
-
-              <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
-                Name: <input type="text" name="fname">
-                <input type="submit" value="Submit">
-                </form>
-
-               <input
-                type="email"
-                class="form-control"
-                id="add-vehicle-id"
-                placeholder="Vehicle Name"
-              />
-            </div> 
-
-            <div class="modal-footer">
-        
-     
-
-              <button id="close-add-modal" type="button" class="btn btn-dark">
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> 
-
-       <div id="add-vehicle-status-modal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Create Vehicle</h5>
-            </div>
-            <div class="modal-body"></div>
-
-            <div class="p-5">
-
-
-
-
-              <input
-                type="checkbox"
-                class="form-control"
-                id="add-vehicle-status"
-           
-              />
-            </div>
-
-            <div class="modal-footer">
-              <button
-                id="add-properties-btn"
-                type="button"
-                class="btn btn-dark"
-              >
-                Create Vehicle
-              </button>
-
-              <button id="close-add-modal" type="button" class="btn btn-dark">
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
       <div class="modal" id="work-order-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
