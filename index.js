@@ -39,7 +39,7 @@ function perRowViewPropertiesClickEvent(vehicleObject) {
     console.log(`opening vehicle row `, vehicleObject);
 
     $("#view-vehicle-modal").show();
-
+    $("ul#view-modal-vehicle-property-list").empty();
     for (const [key, value] of Object.entries(vehicleObject)) {
       $("ul#view-modal-vehicle-property-list").append(`
       <li> <strong> ${key} : </strong> <span> 
@@ -91,17 +91,16 @@ function linkCheckBox(vehicleObject) {
 }
 
 function createRowObjectEvent() {
+  let vehicleObject = {};
+  let id = $("input#add-vehicle-id").val();
+  let myfleet = $("input#add-vehicle-name").val();
+  let vStatus = $("input#add-vehicle-status").is(":checked");
+  vehicleObject.id = id;
+  vehicleObject.myfleet = myfleet;
+  vehicleObject.vStatus = vStatus;
+  console.log(vehicleObject);
 
-    let vehicleObject = {};
-    let id = $("input#add-vehicle-id").val();
-    let myfleet = $("input#add-vehicle-name").val();
-    let vStatus = $("input#add-vehicle-status").is(":checked");
-    vehicleObject.id = id;
-    vehicleObject.myfleet = myfleet;
-    vehicleObject.vStatus = vStatus;
-    console.log(vehicleObject);
-
-    let rowHtmlStr = `
+  let rowHtmlStr = `
       <tr id="vehicle-row-${vehicleObject.id}">
         <td > ${vehicleObject.myfleet} </td>
         <td >
@@ -111,15 +110,13 @@ function createRowObjectEvent() {
         <td> <button id="vehicle-edit-${vehicleObject.id}">Edit </button>
         <td> <button id="vehicle-delete-${vehicleObject.id}">Delete </button>
       </tr>`;
-    $("#vehicle-table-body").append(rowHtmlStr);
-$("n")
-    linkCheckBox(vehicleObject);
-    perRowViewPropertiesClickEvent(vehicleObject);
-    perRowEditPropertiesClickEvent(vehicleObject);
-    // perRowSetCheckbox(vehicleObject);
-
-    console.log("Array list objects", vehicleObjects);
-  
+  $("#vehicle-table-body").append(rowHtmlStr);
+  vehicleObjects.push(vehicleObject);
+  linkCheckBox(vehicleObject);
+  perRowViewPropertiesClickEvent(vehicleObject);
+  perRowEditPropertiesClickEvent(vehicleObject);
+  // perRowSetCheckbox(vehicleObject);
+  console.log("Array list objects", vehicleObjects);
 }
 
 function init() {
