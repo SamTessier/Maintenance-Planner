@@ -33,6 +33,7 @@ function viewModalEvents() {
 //     vehicleObject.vStatus
 //   );
 // }
+// 
 
 function perRowViewPropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-view-${vehicleObject.id}`).click(function () {
