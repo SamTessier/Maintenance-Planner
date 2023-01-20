@@ -1,5 +1,31 @@
 var vehicleObjects = [];
 
+// LIST or ARRAY
+// DELETE EXAMPLE
+//let arr = [1, 2, 3, 4]
+//arr.remove(1)
+//let arr = [{fleet: "dssd", id: "1"}, {fleet: "1112", id: "2"}]
+//arr.remove(vechicleObject)
+// EDIT EXAMPLE
+// for(let i; i < arr.length: i++) { 
+//   if(a == vehicleObject) {
+//      a["fleet"] = newName
+//      arr[i] = a
+//   } 
+// }
+
+// MAP or JSON or OBJECT or DICTIONARY
+// var vehicleObjects = {
+//    name1 : {fleet: "dssd", id: "1"}
+//    name2 : {fleet: "dssd", id: "2"}
+// }
+// EDIT 
+// vehicleObject["fleet"] = newName
+// vehicleObjects["name1"] = vehicleObject
+// DELETE
+// delete vehicleObjects["name1"]
+
+
 function editModalEvents() {
   $("button#close-edit-modal").click(function () {
     $("#edit-vehicle-modal").hide();
@@ -17,13 +43,19 @@ function addModalEvents() {
 
   $("button#add-properties-btn").click(function () {
     createRowObjectEvent();
-    $("#add-vehicle-modal").hide();
+    $("div#add-vehicle-modal").hide();
   });
 }
 
 function viewModalEvents() {
   $("button#close-view-modal").click(function () {
-    $("#view-vehicle-modal").hide();
+    $("div#view-vehicle-modal").hide();
+  });
+}
+
+function deleteModalEvents() {
+  $(`button#close-delete-modal`).click(function () {
+    $("div#delete-vehicle-modal").hide();
   });
 }
 
@@ -55,7 +87,7 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
     console.log(`opening vehicle edit `, vehicleObject);
 
     $("#edit-vehicle-modal").show();
-
+    $("ul#edit-modal-vehicle-property-list").empty();
     for (const [key, value] of Object.entries(vehicleObject)) {
       $("ul#edit-modal-vehicle-property-list").append(`
       <li> <strong> ${key} : </strong> <span> 
@@ -70,17 +102,12 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
   });
 }
 
-function fillVehicleTable() {
-  console.log("Calling FillVT modified");
-
-  for (let index = 0; index < vehicleObjects.length; index++) {
-    let vehicleObject = vehicleObjects[index];
-
-    linkCheckBox(vehicleObject);
-    perRowViewPropertiesClickEvent(vehicleObject);
-    perRowEditPropertiesClickEvent(vehicleObject);
-    // perRowSetCheckbox(vehicleObject);
-  }
+function perRowDeletePropertiesClickEvent(vehicleObject) {
+  $(`button#vehicle-delete-${vehicleObject.id}`).click(function () {
+    console.log(`deleteing vehicle `, vehicleObject);
+    $("span#delete-vehicle-name").html(vehicleObject["myfleet"]);
+    $("#delete-vehicle-modal").show();
+  });
 }
 
 function linkCheckBox(vehicleObject) {
@@ -115,6 +142,7 @@ function createRowObjectEvent() {
   linkCheckBox(vehicleObject);
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
+  perRowDeletePropertiesClickEvent(vehicleObject);
   // perRowSetCheckbox(vehicleObject);
   console.log("Array list objects", vehicleObjects);
 }
@@ -123,8 +151,8 @@ function init() {
   console.log("Initializing Events / Asynchrnous operations");
   addModalEvents();
   editModalEvents();
+  deleteModalEvents();
   viewModalEvents();
-  fillVehicleTable();
 }
 
 $(document).ready(() => {
@@ -149,3 +177,10 @@ function findNReplace(objIdToReplace, newId, newName, newStatus) {
   deleteHTMLTableRows();
   renderTableRows();
 }
+
+
+
+
+
+
+
