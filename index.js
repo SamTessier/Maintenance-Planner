@@ -7,24 +7,23 @@ var vehicleObjects = [];
 //let arr = [{fleet: "dssd", id: "1"}, {fleet: "1112", id: "2"}]
 //arr.remove(vechicleObject)
 // EDIT EXAMPLE
-// for(let i; i < arr.length: i++) { 
+// for(let i; i < arr.length: i++) {
 //   if(a == vehicleObject) {
 //      a["fleet"] = newName
 //      arr[i] = a
-//   } 
+//   }
 // }
 
 // MAP or JSON or OBJECT or DICTIONARY
 // var vehicleObjects = {
-//    name1 : {fleet: "dssd", id: "1"}
+//    name1 : {fleet: "dssd", id: "1"} 
 //    name2 : {fleet: "dssd", id: "2"}
 // }
-// EDIT 
+// EDIT
 // vehicleObject["fleet"] = newName
 // vehicleObjects["name1"] = vehicleObject
 // DELETE
 // delete vehicleObjects["name1"]
-
 
 function editModalEvents() {
   $("button#close-edit-modal").click(function () {
@@ -104,9 +103,23 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
 
 function perRowDeletePropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-delete-${vehicleObject.id}`).click(function () {
-    console.log(`deleteing vehicle `, vehicleObject);
+    console.log(`deleting vehicle `, vehicleObject);
     $("span#delete-vehicle-name").html(vehicleObject["myfleet"]);
     $("#delete-vehicle-modal").show();
+    deleteVehicleObjectEvent(vehicleObject);
+  });
+}
+function deleteVehicleObjectEvent(vehicleObject) {
+  $(`#delete-vehicle-btn`).click(function () {
+    for (let i = 0; i < vehicleObjects.length; i++) {
+      if (vehicleObjects[i] === vehicleObject) {
+        vehicleObjects.splice(i, 1);
+        $(`#vehicle-row-${vehicleObject.id}`).remove();
+        $("#delete-vehicle-modal").hide();
+        console.log("Vehicle Deleted");
+        break;
+      }
+    }
   });
 }
 
@@ -153,6 +166,7 @@ function init() {
   editModalEvents();
   deleteModalEvents();
   viewModalEvents();
+  
 }
 
 $(document).ready(() => {
@@ -177,10 +191,3 @@ function findNReplace(objIdToReplace, newId, newName, newStatus) {
   deleteHTMLTableRows();
   renderTableRows();
 }
-
-
-
-
-
-
-
