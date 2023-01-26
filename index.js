@@ -16,7 +16,7 @@ var vehicleObjects = [];
 
 // MAP or JSON or OBJECT or DICTIONARY
 // var vehicleObjects = {
-//    name1 : {fleet: "dssd", id: "1"} 
+//    name1 : {fleet: "dssd", id: "1"}
 //    name2 : {fleet: "dssd", id: "2"}
 // }
 // EDIT
@@ -57,14 +57,6 @@ function deleteModalEvents() {
     $("div#delete-vehicle-modal").hide();
   });
 }
-
-// function perRowSetCheckbox(vehicleObject) {
-//   $(`input#vehicle-status-${vehicleObject.id}`).prop(
-//     "checked",
-//     vehicleObject.vStatus
-//   );
-// }
-// 
 
 function perRowViewPropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-view-${vehicleObject.id}`).click(function () {
@@ -110,6 +102,7 @@ function perRowDeletePropertiesClickEvent(vehicleObject) {
     deleteVehicleObjectEvent(vehicleObject);
   });
 }
+
 function deleteVehicleObjectEvent(vehicleObject) {
   $(`#delete-vehicle-btn`).click(function () {
     for (let i = 0; i < vehicleObjects.length; i++) {
@@ -167,7 +160,6 @@ function init() {
   editModalEvents();
   deleteModalEvents();
   viewModalEvents();
-  
 }
 
 $(document).ready(() => {
