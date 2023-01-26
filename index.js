@@ -96,7 +96,7 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
 }
 
 function editVehiclePropertiesEvent(vehicleObject) {
-  $("#edit-properties-btn").click(function() {
+  $("#edit-properties-btn").click(function () {
     for (const [key, value] of Object.entries(vehicleObject)) {
       let newValue = $(`#edit-value-${key}`).val();
       vehicleObject[key] = newValue;
@@ -108,8 +108,8 @@ function editVehiclePropertiesEvent(vehicleObject) {
 
 function updateVehicleRow(vehicleObject) {
   for (const [key, value] of Object.entries(vehicleObject)) {
-      let newValue = $(`#edit-value-${key}`).val();
-      vehicleObject[key] = newValue;
+    let newValue = $(`#edit-value-${key}`).val();
+    vehicleObject[key] = newValue;
   }
 
   let row = $(`#vehicle-row-${vehicleObject.id}`);
@@ -128,8 +128,6 @@ function updateVehicleRow(vehicleObject) {
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
 }
-
-
 
 function perRowDeletePropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-delete-${vehicleObject.id}`).click(function () {
@@ -187,7 +185,6 @@ function createRowObjectEvent() {
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
-  // perRowSetCheckbox(vehicleObject);
   console.log("Array list objects", vehicleObjects);
 }
 
@@ -204,20 +201,3 @@ $(document).ready(() => {
   init();
 });
 
-// save into array
-// once you edit, find obj based on id, delete it, insert in place
-
-function findNReplace(objIdToReplace, newId, newName, newStatus) {
-  vehicleObjects.forEach(function (objAtIndex, index) {
-    if (objAtIndex["id"] == objIdToReplace) {
-      vehicleObjects[index] = {
-        id: newId,
-        myfleet: newName,
-        vStatus: newStatus,
-      };
-    }
-  });
-
-  deleteHTMLTableRows();
-  renderTableRows();
-}
