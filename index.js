@@ -91,8 +91,45 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
     /> </span> </li>
       `);
     }
+    editVehiclePropertiesEvent(vehicleObject);
   });
 }
+
+function editVehiclePropertiesEvent(vehicleObject) {
+  $("#edit-properties-btn").click(function() {
+    for (const [key, value] of Object.entries(vehicleObject)) {
+      let newValue = $(`#edit-value-${key}`).val();
+      vehicleObject[key] = newValue;
+    }
+    updateVehicleRow(vehicleObject);
+    $("#edit-vehicle-modal").hide();
+  });
+}
+
+function updateVehicleRow(vehicleObject) {
+  for (const [key, value] of Object.entries(vehicleObject)) {
+      let newValue = $(`#edit-value-${key}`).val();
+      vehicleObject[key] = newValue;
+  }
+
+  let row = $(`#vehicle-row-${vehicleObject.id}`);
+  row.empty();
+  row.append(`
+      <td > ${vehicleObject.myfleet} </td>
+      <td >
+          <input type="checkbox" id="vehicle-status-${vehicleObject.id}" >
+      </td> 
+      <td> <button id="vehicle-view-${vehicleObject.id}">View</button> </td>
+      <td> <button id="vehicle-edit-${vehicleObject.id}">Edit</button> </td>
+      <td> <button id="vehicle-delete-${vehicleObject.id}">Delete</button> </td>
+  `);
+  linkCheckBox(vehicleObject);
+  perRowViewPropertiesClickEvent(vehicleObject);
+  perRowEditPropertiesClickEvent(vehicleObject);
+  perRowDeletePropertiesClickEvent(vehicleObject);
+}
+
+
 
 function perRowDeletePropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-delete-${vehicleObject.id}`).click(function () {
