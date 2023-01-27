@@ -1,4 +1,4 @@
-var vehicleObjects = [];
+let vehiceMap = new Map();
 
 // LIST or ARRAY
 // DELETE EXAMPLE
@@ -80,7 +80,7 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
 
     $("#edit-vehicle-modal").show();
     $("ul#edit-modal-vehicle-property-list").empty();
-    for (const [key, value] of Object.entries(vehicleObject)) {
+    vehicleObject.forEach((value, key) => {
       $("ul#edit-modal-vehicle-property-list").append(`
       <li> <strong> ${key} : </strong> <span> 
       <input id="edit-value-${key}"
@@ -90,21 +90,23 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
       value=${value}
     /> </span> </li>
       `);
-    }
+    });
     editVehiclePropertiesEvent(vehicleObject);
   });
 }
 
 function editVehiclePropertiesEvent(vehicleObject) {
   $("#edit-properties-btn").click(function () {
-    for (const [key, value] of Object.entries(vehicleObject)) {
+    let newVehicleObject = new Map();
+    vehicleObject.forEach((value, key) => {
       let newValue = $(`#edit-value-${key}`).val();
-      vehicleObject[key] = newValue;
-    }
-    updateVehicleRow(vehicleObject);
+      newVehicleObject.set(key, newValue);
+    });
+    updateVehicleRow(newVehicleObject);
     $("#edit-vehicle-modal").hide();
   });
 }
+
 
 function updateVehicleRow(vehicleObject) {
   for (const [key, value] of Object.entries(vehicleObject)) {
@@ -127,7 +129,11 @@ function updateVehicleRow(vehicleObject) {
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
+  // update the map
+  vehicleObjects.set(vehicleObject.id, vehicleObject);
 }
+
+
 
 function perRowDeletePropertiesClickEvent(vehicleObject) {
   $(`button#vehicle-delete-${vehicleObject.id}`).click(function () {
@@ -140,17 +146,18 @@ function perRowDeletePropertiesClickEvent(vehicleObject) {
 
 function deleteVehicleObjectEvent(vehicleObject) {
   $(`#delete-vehicle-btn`).click(function () {
-    for (let i = 0; i < vehicleObjects.length; i++) {
-      if (vehicleObjects[i] === vehicleObject) {
-        vehicleObjects.splice(i, 1);
-        $(`#vehicle-row-${vehicleObject.id}`).remove();
-        $("#delete-vehicle-modal").hide();
-        console.log("Vehicle Deleted");
-        break;
+    vehicleObjects = vehicleObjects.map((obj) => {
+      if (obj !== vehicleObject) {
+        return obj;
       }
-    }
+    });
+    $(`#vehicle-row-${vehicleObject.id}`).remove();
+    $("#delete-vehicle-modal").hide();
+    console.log("Vehicle Deleted");
   });
 }
+
+
 
 function linkCheckBox(vehicleObject) {
   $(`input#vehicle-status-${vehicleObject.id}`).prop(
@@ -180,12 +187,12 @@ function createRowObjectEvent() {
         <td> <button id="vehicle-delete-${vehicleObject.id}">Delete </button>
       </tr>`;
   $("#vehicle-table-body").append(rowHtmlStr);
-  vehicleObjects.push(vehicleObject);
+  vehicleMap.set(id, vehicleObject);
   linkCheckBox(vehicleObject);
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
-  console.log("Array list objects", vehicleObjects);
+  console.log("Map of vehicle objects", vehicleMap);
 }
 
 function init() {
