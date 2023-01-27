@@ -1,4 +1,4 @@
-let vehiceMap = new Map();
+// var vehiceObjects = new Map();
 
 // LIST or ARRAY
 // DELETE EXAMPLE
@@ -59,7 +59,7 @@ function deleteModalEvents() {
 }
 
 function perRowViewPropertiesClickEvent(vehicleObject) {
-  $(`button#vehicle-view-${vehicleObject.id}`).click(function () {
+  $(`button#vehicle-view-${vehicleObject.name}`).click(function () {
     console.log(`opening vehicle row `, vehicleObject);
 
     $("#view-vehicle-modal").show();
@@ -75,7 +75,7 @@ function perRowViewPropertiesClickEvent(vehicleObject) {
 }
 
 function perRowEditPropertiesClickEvent(vehicleObject) {
-  $(`button#vehicle-edit-${vehicleObject.id}`).click(function () {
+  $(`button#vehicle-edit-${vehicleObject.name}`).click(function () {
     console.log(`opening vehicle edit `, vehicleObject);
 
     $("#edit-vehicle-modal").show();
@@ -114,31 +114,31 @@ function updateVehicleRow(vehicleObject) {
     vehicleObject[key] = newValue;
   }
 
-  let row = $(`#vehicle-row-${vehicleObject.id}`);
+  let row = $(`#vehicle-row-${vehicleObject}`);
   row.empty();
   row.append(`
-      <td > ${vehicleObject.myfleet} </td>
+      <td > ${vehicleObject.name} </td>
       <td >
-          <input type="checkbox" id="vehicle-status-${vehicleObject.id}" >
+          <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
       </td> 
-      <td> <button id="vehicle-view-${vehicleObject.id}">View</button> </td>
-      <td> <button id="vehicle-edit-${vehicleObject.id}">Edit</button> </td>
-      <td> <button id="vehicle-delete-${vehicleObject.id}">Delete</button> </td>
+      <td> <button id="vehicle-view-${vehicleObject}">View</button> </td>
+      <td> <button id="vehicle-edit-${vehicleObject}">Edit</button> </td>
+      <td> <button id="vehicle-delete-${vehicleObject}">Delete</button> </td>
   `);
   linkCheckBox(vehicleObject);
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
   // update the map
-  vehicleObjects.set(vehicleObject.id, vehicleObject);
+  vehicleObjects.set(vehicleObject);
 }
 
 
 
 function perRowDeletePropertiesClickEvent(vehicleObject) {
-  $(`button#vehicle-delete-${vehicleObject.id}`).click(function () {
+  $(`button#vehicle-delete-${vehicleObject.name}`).click(function () {
     console.log(`deleting vehicle `, vehicleObject);
-    $("span#delete-vehicle-name").html(vehicleObject["myfleet"]);
+    $("span#delete-vehicle-name").html(vehicleObject["name"]);
     $("#delete-vehicle-modal").show();
     deleteVehicleObjectEvent(vehicleObject);
   });
@@ -151,7 +151,7 @@ function deleteVehicleObjectEvent(vehicleObject) {
         return obj;
       }
     });
-    $(`#vehicle-row-${vehicleObject.id}`).remove();
+    $(`#vehicle-row-${vehicleObject}`).remove();
     $("#delete-vehicle-modal").hide();
     console.log("Vehicle Deleted");
   });
@@ -160,39 +160,38 @@ function deleteVehicleObjectEvent(vehicleObject) {
 
 
 function linkCheckBox(vehicleObject) {
-  $(`input#vehicle-status-${vehicleObject.id}`).prop(
+  $(`input#vehicle-status-${vehicleObject.name}`).prop(
     "checked",
     vehicleObject.vStatus
   );
 }
 
 function createRowObjectEvent() {
+  let vehicleObjects = new Map();
   let vehicleObject = {};
-  let id = $("input#add-vehicle-id").val();
-  let myfleet = $("input#add-vehicle-name").val();
+  let name = $("input#add-vehicle-name").val();
   let vStatus = $("input#add-vehicle-status").is(":checked");
-  vehicleObject.id = id;
-  vehicleObject.myfleet = myfleet;
+  vehicleObject.name = name;
   vehicleObject.vStatus = vStatus;
   console.log(vehicleObject);
 
   let rowHtmlStr = `
-      <tr id="vehicle-row-${vehicleObject.id}">
-        <td > ${vehicleObject.myfleet} </td>
+      <tr id="vehicle-row-${vehicleObject.name}">
+        <td > ${vehicleObject.name} </td>
         <td >
-            <input type="checkbox" id="vehicle-status-${vehicleObject.id}" >
+            <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
         </td> 
-        <td> <button id="vehicle-view-${vehicleObject.id}">View </button>
-        <td> <button id="vehicle-edit-${vehicleObject.id}">Edit </button>
-        <td> <button id="vehicle-delete-${vehicleObject.id}">Delete </button>
+        <td> <button id="vehicle-view-${vehicleObject.name}">View </button>
+        <td> <button id="vehicle-edit-${vehicleObject.name}">Edit </button>
+        <td> <button id="vehicle-delete-${vehicleObject.name}">Delete </button>
       </tr>`;
   $("#vehicle-table-body").append(rowHtmlStr);
-  vehicleMap.set(id, vehicleObject);
+  vehicleObjects.set(vehicleObject, {name, vStatus});
   linkCheckBox(vehicleObject);
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
-  console.log("Map of vehicle objects", vehicleMap);
+  console.log("Map of vehicle objects", vehicleObjects);
 }
 
 function init() {
