@@ -121,15 +121,14 @@ function updateVehicleRow(vehicleObject) {
       <td >
           <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
       </td> 
-      <td> <button id="vehicle-view-${vehicleObject}">View</button> </td>
-      <td> <button id="vehicle-edit-${vehicleObject}">Edit</button> </td>
-      <td> <button id="vehicle-delete-${vehicleObject}">Delete</button> </td>
+      <td> <button id="vehicle-view-${vehicleObject.name}">View</button> </td>
+      <td> <button id="vehicle-edit-${vehicleObject.name}">Edit</button> </td>
+      <td> <button id="vehicle-delete-${vehicleObject.name}">Delete</button> </td>
   `);
   linkCheckBox(vehicleObject);
   perRowViewPropertiesClickEvent(vehicleObject);
   perRowEditPropertiesClickEvent(vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleObject);
-  // update the map
   vehicleObjects.set(vehicleObject);
 }
 
