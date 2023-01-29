@@ -1,5 +1,5 @@
-// var vehiceObjects = new Map();
-
+var vehicleObjects = new Map();
+var selectedVehicleObjectId = null;
 // LIST or ARRAY
 // DELETE EXAMPLE
 //let arr = [1, 2, 3, 4]
@@ -29,6 +29,43 @@ function editModalEvents() {
   $("button#close-edit-modal").click(function () {
     $("#edit-vehicle-modal").hide();
   });
+  $("#edit-properties-btn").click(function () {
+    if (selectedVehicleObjectId != null) {
+      let name = $(`input#edit-value-name`).val();
+      let vStatus = ($(`input#edit-value-vStatus`).val().toLowerCase() === 'true');
+      let newVehicleObject = {};
+      newVehicleObject.name = name;
+      newVehicleObject.vStatus = vStatus;
+      vehicleObjects[selectedVehicleObjectId] = newVehicleObject;
+      console.log("New object appended: ", newVehicleObject, vehicleObjects);
+      $(`tr#vehicle-row-${selectedVehicleObjectId}`).remove();
+      //empty table $(`tbody#vehicle-table-body`).html("");
+      //for loop on the vehicleObjects map recreate table again
+
+      let rowHtmlStr = `
+          <tr id="vehicle-row-${selectedVehicleObjectId}">
+            <td > ${newVehicleObject.name} </td>
+            <td >
+                <input type="checkbox" id="vehicle-status-${newVehicleObject.name}" >
+            </td> 
+            <td> <button id="vehicle-view-${newVehicleObject.name}">View </button>
+            <td> <button id="vehicle-edit-${newVehicleObject.name}">Edit </button>
+            <td> <button id="vehicle-delete-${newVehicleObject.name}">Delete </button>
+          </tr>`;
+      $("#vehicle-table-body").append(rowHtmlStr);
+      linkCheckBox(newVehicleObject);
+      $("div#edit-vehicle-modal").hide();
+      $(`input#edit-value-name`).val("");
+      $(`input#edit-value-vStatus`).prop("checked", false);
+      linkCheckBox(newVehicleObject);
+      perRowViewPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
+      perRowEditPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
+      perRowDeletePropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
+
+    } else {
+      alert("I couldn't find the object");
+    }
+  });
 }
 
 function addModalEvents() {
@@ -56,9 +93,20 @@ function deleteModalEvents() {
   $(`button#close-delete-modal`).click(function () {
     $("div#delete-vehicle-modal").hide();
   });
+  $(`button#delete-vehicle-btn`).click(function () {
+    console.log("Trying to delete object with ID: ", selectedVehicleObjectId);
+    if (selectedVehicleObjectId != null) {
+      // DELETE LOGIC
+      vehicleObjects.delete(selectedVehicleObjectId);
+      $(`tr#vehicle-row-${selectedVehicleObjectId}`).remove();
+      $("#delete-vehicle-modal").hide();
+    } else {
+      alert("Cannot find object to delete.");
+    }
+  });
 }
 
-function perRowViewPropertiesClickEvent(vehicleObject) {
+function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {
   $(`button#vehicle-view-${vehicleObject.name}`).click(function () {
     console.log(`opening vehicle row `, vehicleObject);
 
@@ -74,13 +122,17 @@ function perRowViewPropertiesClickEvent(vehicleObject) {
   });
 }
 
-function perRowEditPropertiesClickEvent(vehicleObject) {
+function perRowEditPropertiesClickEvent(vehicleId, vehicleObject) {
   $(`button#vehicle-edit-${vehicleObject.name}`).click(function () {
-    console.log(`opening vehicle edit `, vehicleObject);
-
     $("#edit-vehicle-modal").show();
-    $("ul#edit-modal-vehicle-property-list").empty();
-    vehicleObject.forEach((value, key) => {
+    $("ul#edit-modal-vehicle-property-list").html("");
+    console.log(
+      `opening vehicle edit `,
+      vehicleObject,
+      Object.entries(vehicleObject)
+    );
+    Object.entries(vehicleObject).forEach(([key, value]) => {
+      //converts the object into a map to do a forloop
       $("ul#edit-modal-vehicle-property-list").append(`
       <li> <strong> ${key} : </strong> <span> 
       <input id="edit-value-${key}"
@@ -91,72 +143,42 @@ function perRowEditPropertiesClickEvent(vehicleObject) {
     /> </span> </li>
       `);
     });
-    editVehiclePropertiesEvent(vehicleObject);
+    selectedVehicleObjectId = vehicleId;
   });
 }
 
-function editVehiclePropertiesEvent(vehicleObject) {
-  $("#edit-properties-btn").click(function () {
-    let newVehicleObject = new Map();
-    vehicleObject.forEach((value, key) => {
-      let newValue = $(`#edit-value-${key}`).val();
-      newVehicleObject.set(key, newValue);
-    });
-    updateVehicleRow(newVehicleObject);
-    $("#edit-vehicle-modal").hide();
-  });
-}
+// function updateVehicleRow(vehicleObject) {
+//   for (const [key, value] of Object.entries(vehicleObject)) {
+//     let newValue = $(`#edit-value-${key}`).val();
+//     vehicleObject[key] = newValue;
+//   }
 
+//   let row = $(`#vehicle-row-${vehicleObject}`);
+//   row.empty();
+//   row.append(`
+//       <td > ${vehicleObject.name} </td>
+//       <td >
+//           <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
+//       </td>
+//       <td> <button id="vehicle-view-${vehicleObject.name}">View</button> </td>
+//       <td> <button id="vehicle-edit-${vehicleObject.name}">Edit</button> </td>
+//       <td> <button id="vehicle-delete-${vehicleObject.name}">Delete</button> </td>
+//   `);
+//   linkCheckBox(vehicleObject);
+//   perRowViewPropertiesClickEvent(vehicleObject);
+//   perRowEditPropertiesClickEvent(vehicleObject);
+//   perRowDeletePropertiesClickEvent(vehicleObject);
+//   vehicleObjects.set(vehicleObject);
+// }
 
-function updateVehicleRow(vehicleObject) {
-  for (const [key, value] of Object.entries(vehicleObject)) {
-    let newValue = $(`#edit-value-${key}`).val();
-    vehicleObject[key] = newValue;
-  }
-
-  let row = $(`#vehicle-row-${vehicleObject}`);
-  row.empty();
-  row.append(`
-      <td > ${vehicleObject.name} </td>
-      <td >
-          <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
-      </td> 
-      <td> <button id="vehicle-view-${vehicleObject.name}">View</button> </td>
-      <td> <button id="vehicle-edit-${vehicleObject.name}">Edit</button> </td>
-      <td> <button id="vehicle-delete-${vehicleObject.name}">Delete</button> </td>
-  `);
-  linkCheckBox(vehicleObject);
-  perRowViewPropertiesClickEvent(vehicleObject);
-  perRowEditPropertiesClickEvent(vehicleObject);
-  perRowDeletePropertiesClickEvent(vehicleObject);
-  vehicleObjects.set(vehicleObject);
-}
-
-
-
-function perRowDeletePropertiesClickEvent(vehicleObject) {
+function perRowDeletePropertiesClickEvent(vehicleId, vehicleObject) {
   $(`button#vehicle-delete-${vehicleObject.name}`).click(function () {
-    console.log(`deleting vehicle `, vehicleObject);
+    console.log(`Showing delete vehicle modal `, vehicleObject);
     $("span#delete-vehicle-name").html(vehicleObject["name"]);
+    selectedVehicleObjectId = vehicleId;
     $("#delete-vehicle-modal").show();
-    deleteVehicleObjectEvent(vehicleObject);
   });
 }
-
-function deleteVehicleObjectEvent(vehicleObject) {
-  $(`#delete-vehicle-btn`).click(function () {
-    vehicleObjects = vehicleObjects.map((obj) => {
-      if (obj !== vehicleObject) {
-        return obj;
-      }
-    });
-    $(`#vehicle-row-${vehicleObject}`).remove();
-    $("#delete-vehicle-modal").hide();
-    console.log("Vehicle Deleted");
-  });
-}
-
-
 
 function linkCheckBox(vehicleObject) {
   $(`input#vehicle-status-${vehicleObject.name}`).prop(
@@ -166,16 +188,16 @@ function linkCheckBox(vehicleObject) {
 }
 
 function createRowObjectEvent() {
-  let vehicleObjects = new Map();
   let vehicleObject = {};
   let name = $("input#add-vehicle-name").val();
   let vStatus = $("input#add-vehicle-status").is(":checked");
+  let vehicleId = name.toLowerCase();
   vehicleObject.name = name;
   vehicleObject.vStatus = vStatus;
   console.log(vehicleObject);
 
   let rowHtmlStr = `
-      <tr id="vehicle-row-${vehicleObject.name}">
+      <tr id="vehicle-row-${vehicleId}">
         <td > ${vehicleObject.name} </td>
         <td >
             <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
@@ -185,11 +207,12 @@ function createRowObjectEvent() {
         <td> <button id="vehicle-delete-${vehicleObject.name}">Delete </button>
       </tr>`;
   $("#vehicle-table-body").append(rowHtmlStr);
-  vehicleObjects.set(vehicleObject, {name, vStatus});
+  vehicleObjects.set(vehicleId, { name, vStatus });
+  console.log(vehicleObjects);
   linkCheckBox(vehicleObject);
-  perRowViewPropertiesClickEvent(vehicleObject);
-  perRowEditPropertiesClickEvent(vehicleObject);
-  perRowDeletePropertiesClickEvent(vehicleObject);
+  perRowViewPropertiesClickEvent(vehicleId, vehicleObject);
+  perRowEditPropertiesClickEvent(vehicleId, vehicleObject);
+  perRowDeletePropertiesClickEvent(vehicleId, vehicleObject);
   console.log("Map of vehicle objects", vehicleObjects);
 }
 
@@ -205,4 +228,3 @@ $(document).ready(() => {
   console.log("Website Ready");
   init();
 });
-
