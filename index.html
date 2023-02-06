@@ -103,24 +103,32 @@
             <h5 class="modal-title">Create Vehicle</h5>
           </div>
           <div class="modal-body text-center">
-          <div class="p-4">
-            <!-- <form id="frm1">
+            <div class="p-4">
+              <!-- <form id="frm1">
               ID
               <input type="text" id="add-vehicle-id" name="id" />
               <br /> -->
               Vehicle Name
-              <input type="text" id="add-vehicle-name"  />
+              <input type="text" id="add-vehicle-name" />
               <br />
-              Is the vehicle in service?
-              <input type="checkbox" id="add-vehicle-status" />
+              <div class="p-1">
+                Is the vehicle in service?
+                <input type="checkbox" id="add-vehicle-status" />
+              </div>
               <br />
-              <button type="button" id="add-properties-btn">Add</button>
-            </form>
-            <button id="close-add-modal" type="button" class="btn btn-dark">
-              Close
-            </button>
+              <button
+                type="button"
+                class="btn btn-dark"
+                id="add-properties-btn"
+              >
+                Add
+              </button>
+              <!-- </form> -->
+              <button id="close-add-modal" type="button" class="btn btn-dark">
+                Close
+              </button>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
@@ -151,7 +159,7 @@
         </div>
       </div>
     </div>
-    
+
     <div id="view-vehicle-modal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -203,8 +211,11 @@
           <div class="modal-header">
             <h5 class="modal-title">Delete Properties</h5>
           </div>
-          <div class="modal-body">Are you sure you want to delete <span id="delete-vehicle-name"></span>?</div>
-         
+          <div class="modal-body">
+            Are you sure you want to delete
+            <span id="delete-vehicle-name"></span>?
+          </div>
+
           <div class="modal-footer">
             <button id="delete-vehicle-btn" type="button" class="btn btn-dark">
               Delete Vehicle

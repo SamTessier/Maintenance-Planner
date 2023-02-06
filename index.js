@@ -32,7 +32,7 @@ function editModalEvents() {
   $("#edit-properties-btn").click(function () {
     if (selectedVehicleObjectId != null) {
       let name = $(`input#edit-value-name`).val();
-      let vStatus = ($(`input#edit-value-vStatus`).val().toLowerCase() === 'true');
+      let vStatus = $(`input#edit-value-vStatus`).prop("checked");
       let newVehicleObject = {};
       newVehicleObject.name = name;
       newVehicleObject.vStatus = vStatus;
@@ -60,8 +60,10 @@ function editModalEvents() {
       linkCheckBox(newVehicleObject);
       perRowViewPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
       perRowEditPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
-      perRowDeletePropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
-
+      perRowDeletePropertiesClickEvent(
+        selectedVehicleObjectId,
+        newVehicleObject
+      );
     } else {
       alert("I couldn't find the object");
     }
@@ -132,16 +134,39 @@ function perRowEditPropertiesClickEvent(vehicleId, vehicleObject) {
       Object.entries(vehicleObject)
     );
     Object.entries(vehicleObject).forEach(([key, value]) => {
-      //converts the object into a map to do a forloop
-      $("ul#edit-modal-vehicle-property-list").append(`
-      <li> <strong> ${key} : </strong> <span> 
-      <input id="edit-value-${key}"
-      type="text"
-      placeholder="Enter ${key}"
-      class="align-self-center"
-      value=${value}
-    /> </span> </li>
-      `);
+      let displayKey = key;
+      if (key === "vStatus") {
+        displayKey = "New Status";
+      } else if (key === "name") {
+        displayKey = "New Vehicle";
+      }
+
+      if (key === "vStatus") {
+        $("ul#edit-modal-vehicle-property-list").append(`
+      <li> 
+        <strong> ${displayKey} : </strong> 
+        <input id="edit-value-${key}"
+        type="checkbox" 
+        class="align-self-center"
+        ${value ? "checked" : ""}
+      /> 
+      </li>
+    `);
+      } else {
+        $("ul#edit-modal-vehicle-property-list").append(`
+      <li> 
+        <strong> ${displayKey} : </strong> 
+        <span> 
+        <input id="edit-value-${key}"
+        type="text"
+        placeholder="Enter ${key}"
+        class="align-self-center"
+        value=${value}
+      /> 
+      </span> 
+      </li>
+    `);
+      }
     });
     selectedVehicleObjectId = vehicleId;
   });
