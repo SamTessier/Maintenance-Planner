@@ -132,29 +132,43 @@
         </div>
       </div>
     </div>
-    <div class="modal" id="work-order-modal" tabindex="-1" role="dialog">
+
+    <div id="work-order-modal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <h5 class="modal-title">Create Work Order</h5>
           </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer">
-            <button
-              id="status-btn"
-              type="checkbox"
-              data-dismiss="modal"
-            ></button>
+          <div class="modal-body text-center">
+            <div class="p-4">
+              <!-- <form id="frm1">
+              ID
+              <input type="text" id="add-vehicle-id" name="id" />
+              <br /> -->
+              Job Description
+              <input type="text" id="job-description" />
+              <br />
+              <div class="p-1">
+                Is additional action required?
+                <input type="checkbox" id="add-vehicle-status" />
+              </div>
+              <br />
+              <button
+                id="enter-work-order-btn"
+                type="button"
+                class="btn btn-dark"
+              >
+                Add
+              </button>
+              <!-- </form> -->
+              <button
+                id="close-work-order-modal"
+                type="button"
+                class="btn btn-dark"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -175,7 +189,11 @@
             <button id="create-work-order" type="button" class="btn btn-dark">
               Create Work Order
             </button>
-            <button id="close-view-modal" type="button" class="btn btn-dark">
+            <button
+              id="close-work-order-modal"
+              type="button"
+              class="btn btn-dark"
+            >
               Close
             </button>
           </div>

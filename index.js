@@ -38,7 +38,7 @@ function editModalEvents() {
       newVehicleObject.vStatus = vStatus;
       vehicleObjects[selectedVehicleObjectId] = newVehicleObject;
       console.log("New object appended: ", newVehicleObject, vehicleObjects);
-      
+
       let rowHtmlStr = `
             <tr id="vehicle-row-${selectedVehicleObjectId}">
               <td > ${newVehicleObject.name} </td>
@@ -49,7 +49,7 @@ function editModalEvents() {
               <td> <button id="vehicle-edit-${newVehicleObject.name}">Edit </button>
               <td> <button id="vehicle-delete-${newVehicleObject.name}">Delete </button>
             </tr>`;
-      
+
       $(`tr#vehicle-row-${selectedVehicleObjectId}`).replaceWith(rowHtmlStr);
       linkCheckBox(newVehicleObject);
       $("div#edit-vehicle-modal").hide();
@@ -58,12 +58,14 @@ function editModalEvents() {
       linkCheckBox(newVehicleObject);
       perRowViewPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
       perRowEditPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
-      perRowDeletePropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
+      perRowDeletePropertiesClickEvent(
+        selectedVehicleObjectId,
+        newVehicleObject
+      );
     } else {
       alert("I couldn't find the object");
     }
   });
-  
 }
 
 function addModalEvents() {
@@ -78,6 +80,19 @@ function addModalEvents() {
   $("button#add-properties-btn").click(function () {
     createRowObjectEvent();
     $("div#add-vehicle-modal").hide();
+  });
+}
+
+function workOrderModalEvents() {
+  $("button#create-work-order").click(function () {
+    $("#work-order-modal").show();
+    $("#view-vehicle-modal").hide();
+  });
+  $("button#close-work-order-modal").click(function () {
+    $("#work-order-modal").hide();
+  });
+  $("button#enter-work-order-btn").click(function () {
+    $("#work-order-modal").hide();
   });
 }
 
@@ -110,7 +125,7 @@ function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {
 
     $("#view-vehicle-modal").show();
     $("ul#view-modal-vehicle-property-list").empty();
-    
+
     for (const [key, value] of Object.entries(vehicleObject)) {
       let displayKey = key;
       let newValue = value;
@@ -132,9 +147,6 @@ function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {
     }
   });
 }
-
-
-
 
 function perRowEditPropertiesClickEvent(vehicleId, vehicleObject) {
   $(`button#vehicle-edit-${vehicleObject.name}`).click(function () {
@@ -233,10 +245,13 @@ function createRowObjectEvent() {
   vehicleObject.vStatus = vStatus;
   console.log(vehicleObject);
 
+  let idList = Array.from(vehicleObjects.keys());
+  let doesIdExists = idList.includes(vehicleId);
+  if (doesIdExists == true) {
+    alert("Repeated Vehicle Name");
+    return;
+  }
 
-
-
-  
   let rowHtmlStr = `
       <tr id="vehicle-row-${vehicleId}">
         <td > ${vehicleObject.name} </td>
@@ -263,9 +278,31 @@ function init() {
   editModalEvents();
   deleteModalEvents();
   viewModalEvents();
+  workOrderModalEvents();
 }
 
 $(document).ready(() => {
   console.log("Website Ready");
   init();
 });
+
+// how to create a vehicle
+// vehicleId = "n1"
+// vehicleObjects.set(vehicleId, {
+//   "name": "n1",
+//   "vStatus": true
+// })
+
+// how to create a workOrder
+//get reference to the existing vehicle
+// let modifiedVehicle = vehicleObjects.get("n1")
+// let workOrders = new Map();
+// workOrder.set("workOrder1", {
+//   'Name': "w1"
+// })
+// workOrder.set("workOrder2", {
+//   'Name': "w2"
+// })
+// modifiedVehicle["workOrder"] = workOrders
+
+// vehicleObjects.set(vehicleId, modifiedVehicle)
