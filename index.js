@@ -36,6 +36,7 @@ function editModalEvents() {
       let newVehicleObject = {};
       newVehicleObject.name = name;
       newVehicleObject.vStatus = vStatus;
+      newVehicleObject.workOrders = vehicleObjects[selectedVehicleObjectId]["workOrders"];
       vehicleObjects[selectedVehicleObjectId] = newVehicleObject;
       console.log("New object appended: ", newVehicleObject, vehicleObjects);
 
@@ -84,14 +85,15 @@ function addModalEvents() {
 }
 
 function workOrderModalEvents() {
-  $("button#create-work-order").click(function () {
+  $("button#open-work-order-modal").click(function () {
     $("#work-order-modal").show();
     $("#view-vehicle-modal").hide();
   });
   $("button#close-work-order-modal").click(function () {
     $("#work-order-modal").hide();
   });
-  $("button#enter-work-order-btn").click(function () {
+  $("button#create-work-order").click(function () {
+    createWorkOrder();
     $("#work-order-modal").hide();
   });
 }
@@ -119,9 +121,28 @@ function deleteModalEvents() {
   });
 }
 
+function createWorkOrder() {
+  if (selectedVehicleObjectId != null) {
+    let vehicleObjectToModify = vehicleObjects.get(selectedVehicleObjectId);
+    console.log("Viewing object to add a work order: ", selectedVehicleObjectId, vehicleObjectToModify);
+
+    let description = $("input#work-order-job-description").val();
+    let actionRequired = $("input#work-order-action-required").is(":checked");
+    let workOrderId =  selectedVehicleObjectId + "-" + description.substring(0, 5).toLowerCase();
+    
+    vehicleObjectToModify["workOrders"].set(workOrderId, {description, actionRequired});
+
+    vehicleObjects.set(selectedVehicleObjectId, vehicleObjectToModify);
+
+    console.log(vehicleObjects);
+  } else {
+    alert("I couldn't find the object");
+  }
+}
+
 function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {
   $(`button#vehicle-view-${vehicleObject.name}`).click(function () {
-    console.log(`opening vehicle row `, vehicleObject);
+    console.log(`opening vehicle row `, vehicleObject, Object.entries(vehicleObject["workOrders"])  );
 
     $("#view-vehicle-modal").show();
     $("ul#view-modal-vehicle-property-list").empty();
@@ -140,11 +161,26 @@ function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {
         displayKey = "Vehicle";
       }
       $("ul#view-modal-vehicle-property-list").append(`
-      <li> <strong> ${displayKey} : </strong> <span> 
-      ${newValue}
-      </span> </li>
+        <li>
+           <strong> ${displayKey} : </strong>
+           <span>  ${newValue} </span> 
+        </li>
       `);
     }
+
+    $("tbody#work-order-table-body").html("");
+    {
+      for ( const [workOrderId, workOrderObject] of vehicleObject["workOrders"].entries())
+      console.log("Creating work order row: " ,workOrderId,  workOrderObject)
+      $("tbody#work-order-table-body").append(`
+      <tr> 
+        <td>${workOrderId}</td>
+        <td>${workOrderObject["description"]}</td>
+        <td>${workOrderObject["actionRequired"]}</td>
+      </tr>
+      `);
+    }
+    selectedVehicleObjectId = vehicleId;
   });
 }
 
@@ -243,7 +279,10 @@ function createRowObjectEvent() {
   let vehicleId = name.toLowerCase();
   vehicleObject.name = name;
   vehicleObject.vStatus = vStatus;
-  console.log(vehicleObject);
+  vehicleObject.workOrders = new Map();
+  let vehicleJson = JSON.stringify(vehicleObject);
+  console.log("JSON below");
+  console.log(vehicleJson);
 
   let idList = Array.from(vehicleObjects.keys());
   let doesIdExists = idList.includes(vehicleId);
@@ -263,8 +302,11 @@ function createRowObjectEvent() {
         <td> <button id="vehicle-delete-${vehicleObject.name}">Delete </button>
       </tr>`;
   $("#vehicle-table-body").append(rowHtmlStr);
-  vehicleObjects.set(vehicleId, { name, vStatus });
-  console.log(vehicleObjects);
+  
+  // Create Object on Map of Vehicles
+  vehicleObjects.set(vehicleId, vehicleObject);
+
+  console.log("Creating new object: ", vehicleObjects);
   linkCheckBox(vehicleObject);
   perRowViewPropertiesClickEvent(vehicleId, vehicleObject);
   perRowEditPropertiesClickEvent(vehicleId, vehicleObject);

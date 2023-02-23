@@ -146,15 +146,15 @@
               <input type="text" id="add-vehicle-id" name="id" />
               <br /> -->
               Job Description
-              <input type="text" id="job-description" />
+              <input type="text" id="work-order-job-description" />
               <br />
               <div class="p-1">
                 Is additional action required?
-                <input type="checkbox" id="add-vehicle-status" />
+                <input type="checkbox" id="work-order-action-required" />
               </div>
               <br />
               <button
-                id="enter-work-order-btn"
+                id="create-work-order"
                 type="button"
                 class="btn btn-dark"
               >
@@ -184,9 +184,21 @@
             <ul id="view-modal-vehicle-property-list">
               <!-- insert list entries automatically from Jquery-->
             </ul>
+            <table class="table table-striped table-dark mt-5">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Work Order Description</th>
+                  <th scope="col">Action Required?</th>
+                </tr>
+              </thead>
+              <tbody id="work-order-table-body">
+                <!--Inject rows from JQuery-->
+              </tbody>
+            </table>
           </div>
           <div class="modal-footer">
-            <button id="create-work-order" type="button" class="btn btn-dark">
+            <button id="open-work-order-modal" type="button" class="btn btn-dark">
               Create Work Order
             </button>
             <button
