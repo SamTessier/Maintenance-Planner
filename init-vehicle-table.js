@@ -61,6 +61,9 @@ function createRowObjectEvent() {
   perRowEditPropertiesClickEvent(vehicleId, vehicleObject);
   perRowDeletePropertiesClickEvent(vehicleId, vehicleObject);
   console.log("Map of vehicle objects", vehicleObjects);
+
+  $("input#add-vehicle-name").val("");
+  $("input#add-vehicle-status").val(null);
 }
 
 $(document).ready(() => {
