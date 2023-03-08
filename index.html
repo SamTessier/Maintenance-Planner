@@ -17,28 +17,6 @@
       <div class="container-fluid">
         <a href="#" class="navbar-brand">Fleet Manager</a>
 
-        <!--Start of dropdown experiment-->
-
-        <!-- <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div> -->
-
-        <!--end of dropdown experiment-->
-
         <button
           class="navbar-toggler"
           type="button"
@@ -47,79 +25,69 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar nav">
-            <li class="nav-item">
-              <a href="#about" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-              <a href="#support" class="nav-link">Support</a>
-            </li>
-            <li class="nav-item">
-              <a href="#contact" class="nav-link">Contact</a>
-            </li>
-          </ul>
-        </div> -->
       </div>
     </nav>
 
-
-
     <section class="bg-dark text-light p-5 text-center">
       <div class="container-fluid"></div>
-
       <button
-        id="new-vehicle-input"
-        type="button"
-        class="btn btn-info"
-      >
-        Add Vehicle to Fleet
-      </button>
+      id="open-view-fleet-modal"
+      type="button"
+      class="btn btn-info">
+      My Fleet
+    </button>
 
-      <div>
-        <table class="table table-striped table-dark mt-5 container-fluid">
-          <thead>
-            <!-- <tr>
-              <th scope="col">My Fleet</th>
-              <th scope="col">Status</th>
-            </tr> -->
-          </thead>
-          <tbody id="vehicle-table-body">
-            <!--Inject rows from JQuery-->
-          </tbody>
-        </table>
-      </div>
+     
     </section>
 
-
-<div id="welcome-modal" class="modal container-fluid" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Welcome!</h5>
-       
-    
-      </div>
-      <div class="modal-body container-fluid">
-        `Welcome to my fleet management program! This application is designed for anyone who relies on a maintaining a fleet of vehicles or equipment in order to run their business. When you enter, log each of your vehicles to create your fleet, and then you can start keeping track of any upcoming scheduled or non-scheduled service, appointments, registrations, or parts that need to be ordered.<button type="button" class="btn btn-link font-weight-light" id="welcome-modal-learn-more-btn">Learn more</button>`
-      </div>
-      <div class="modal-footer align-content-center">
-        
-        <button type="button" class="btn btn-info ml-5" id="welcome-modal-btn">Enter</button>
-        
-       
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    <div id="add-vehicle-modal" class="modal container-fluid" tabindex="-1" role="dialog">
+    <div
+      id="welcome-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Vehicle to Fleet</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Welcome!</h5>
+          </div>
+          <div class="modal-body container-fluid">
+            Welcome to my fleet management program! This application is designed
+            for anyone who relies on a maintaining a fleet of vehicles or
+            equipment in order to run their business. When you enter, log each
+            of your vehicles to create your fleet, and then you can start
+            keeping track of any upcoming scheduled or non-scheduled service,
+            appointments, registrations, or parts to be ordered.<button
+              type="button"
+              class="btn btn-link font-weight-light"
+              id="welcome-modal-learn-more-btn"
+            >
+              Learn more
+            </button>
+          </div>
+          <div class="modal-footer align-content-center">
+            <button
+              type="button"
+              class="btn btn-info ml-5"
+              id="welcome-modal-btn"
+            >
+              Enter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="add-vehicle-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Vehicle Info</h5>
           </div>
           <div class="modal-body text-center">
             <div class="p-4">
@@ -127,13 +95,21 @@
               ID
               <input type="text" id="add-vehicle-id" name="id" />
               <br /> -->
-              Vehicle Name
+              Vehicle Name <br />
               <input type="text" id="add-vehicle-name" />
+
+              <br />Year<br /><input type="text" id="add-vehicle-year" />
+              <br />Make<br /><input type="text" id="add-vehicle-make" />
+              <br />Model<br /><input type="text" id="add-vehicle-model" />
+              <br />License Plate<br /><input
+                type="text"
+                id="add-vehicle-license-plate"
+              />
               <br />
-              <!-- <div class="p-1">
-                Is the vehicle in service?
+              <div class="p-1">
+                Is the vehicle in service?<br />
                 <input type="checkbox" id="add-vehicle-status" />
-              </div> -->
+              </div>
               <br />
               <button
                 type="button"
@@ -143,14 +119,24 @@
                 Add Vehicle
               </button>
               <!-- </form> -->
-              <button id="close-add-modal"class="btn btn-xs btn-link text-right font-weight-light">Close</button>
+              <button
+                id="close-add-modal"
+                class="btn btn-xs btn-link text-right font-weight-light"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="work-order-modal" class="modal container-fluid" tabindex="-1" role="dialog">
+    <div
+      id="work-order-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -191,7 +177,60 @@
       </div>
     </div>
 
-    <div id="view-vehicle-modal" class="modal container-fluid" tabindex="-1" role="dialog">
+    <div
+    id="view-fleet-modal"
+    class="modal container-fluid"
+    tabindex="-1"
+    role="dialog"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">My Fleet</h5>
+        </div>
+        <div class="modal-body" id="view-fleet-modal-body">
+          
+          <table class="table table-striped table-dark mt-5 container-fluid">
+            <thead>
+              <!-- <tr>
+                <th scope="col">My Fleet</th>
+                <th scope="col">Status</th>
+              </tr> -->
+            </thead>
+            <tbody id="vehicle-table-body">
+              <!--Inject rows from JQuery-->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="modal-footer">
+
+          <button
+          id="new-vehicle-input"
+          type="button"
+          class="btn btn-info"
+          >
+          Add Vehicle to Fleet
+        </button>
+         
+          <button
+            id="close-fleet-modal-btn"
+            type="button"
+            class="btn btn-dark"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div
+      id="view-vehicle-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -214,8 +253,12 @@
               </tbody>
             </table>
           </div>
-          <div class="modal-footer" id="view-modal-footer"></div>
-            <button id="open-work-order-modal" type="button" class="btn btn-dark">
+          <div class="modal-footer">
+            <button
+              id="open-work-order-modal"
+              type="button"
+              class="btn btn-dark"
+            >
               Begin Work Order
             </button>
             <button
@@ -230,7 +273,12 @@
       </div>
     </div>
 
-    <div id="edit-vehicle-modal" class="modal container-fluid" tabindex="-1" role="dialog">
+    <div
+      id="edit-vehicle-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -252,7 +300,12 @@
       </div>
     </div>
 
-    <div id="delete-vehicle-modal" class="modal container-fluid" tabindex="-1" role="dialog">
+    <div
+      id="delete-vehicle-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -290,14 +343,19 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    
-    <script src="init-data.js" ></script>
-    <script src="init-modal-events.js" ></script>
-    <script src="utils.js" ></script>
-    <script src="view-vehicle.js" ></script>
-    <script src="edit-vehicle.js" ></script>
-    <script src="delete-vehicle.js" ></script>
-    <script src="work-order.js" ></script>
+    <script
+      type="text/javascript"
+      src="https://andywer.github.io/jquery-dim-background/jquery.dim-background.min.js"
+    ></script>
+
+    <script src="init-data.js"></script>
+    <script src="init-modal-events.js"></script>
+    <script src="style.css"></script>
+    <script src="utils.js"></script>
+    <script src="view-vehicle.js"></script>
+    <script src="edit-vehicle.js"></script>
+    <script src="delete-vehicle.js"></script>
+    <script src="work-order.js"></script>
     <script src="init-vehicle-table.js"></script>
   </body>
 </html>

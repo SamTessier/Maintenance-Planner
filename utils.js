@@ -4,3 +4,5 @@ function linkCheckBox(vehicleObject) {
     vehicleObject.vStatus
   );
 }
+
+

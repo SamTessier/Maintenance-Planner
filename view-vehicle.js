@@ -5,7 +5,7 @@ function populateViewModal(vehicleId, vehicleObject) {
       Object.entries(vehicleObject["workOrders"])
     );
   
-    $("#view-vehicle-modal").show();
+    $("#view-vehicle-modal").show().dimBackground();
     $("ul#view-modal-vehicle-property-list").empty();
   
     for (const [key, value] of Object.entries(vehicleObject)) {

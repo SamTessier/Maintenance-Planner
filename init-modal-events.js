@@ -1,12 +1,21 @@
 function welcomeModalEvents() {
   $("button#welcome-modal-btn").click(function () {
-    $("#welcome-modal").hide();
+    $("#welcome-modal").hide().undim();
+  });
+}
+
+function myFleetModalEvents() {
+  $("button#open-view-fleet-modal").click(function () {
+    $("#view-fleet-modal").show().dimBackground();
+  });
+  $("button#close-fleet-modal-btn").click(function () {
+    $("#view-fleet-modal").hide().undim();
   });
 }
 
 function editModalEvents() {
   $("button#close-edit-modal").click(function () {
-    $("#edit-vehicle-modal").hide();
+    $("#edit-vehicle-modal").hide().undim();
   });
   $("#edit-properties-btn").click(function () {
     if (selectedVehicleObjectId != null) {
@@ -51,28 +60,30 @@ function editModalEvents() {
 
 function addModalEvents() {
   $("button#close-add-modal").click(function () {
-    $("#add-vehicle-modal").hide();
+    $("#add-vehicle-modal").hide().undim();
   });
 
   $("button#new-vehicle-input").click(function () {
-    $("#add-vehicle-modal").show();
+    $("#view-fleet-modal").hide().undim();
+    $("#add-vehicle-modal").show().dimBackground();
   });
 
   $("button#add-properties-btn").click(function () {
     createRowObjectEvent();
-    $("div#add-vehicle-modal").hide();
+    $("#add-vehicle-modal").hide().undim();
+    $("#view-fleet-modal").show().dimBackground();
   });
 }
 
 function viewModalEvents() {
   $("button#close-view-modal-btn").click(function () {
-    $("#view-vehicle-modal").hide();
+    $("#view-vehicle-modal").hide().undim();
   });
 }
 
 function deleteModalEvents() {
   $(`button#close-delete-modal`).click(function () {
-    $("div#delete-vehicle-modal").hide();
+    $("div#delete-vehicle-modal").hide().undim();
   });
   $(`button#delete-vehicle-btn`).click(function () {
     console.log("Trying to delete object with ID: ", selectedVehicleObjectId);
@@ -89,13 +100,17 @@ function deleteModalEvents() {
 
 function workOrderModalEvents() {
   $("button#open-work-order-modal").click(function () {
-    $("#work-order-modal").show();
-    $("#view-vehicle-modal").hide();
+    $("#work-order-modal").show().dimBackground();
+    $("#view-fleet-modal").hide().undim();
+    $("#view-vehicle-modal").hide().undim();
   });
   $("button#close-work-order-modal").click(function () {
-    $("#work-order-modal").hide();
+    $("#work-order-modal").hide().undim();
   });
-  $("button#create-work-order-btn").click(createWorkOrder);
+  $("button#create-work-order-btn").click(function () {
+    createWorkOrder();
+    $("#work-order-modal").hide().undim();
+  });
 }
 
 function init() {
@@ -106,5 +121,6 @@ function init() {
   viewModalEvents();
   welcomeModalEvents();
   workOrderModalEvents();
-  $("#welcome-modal").show();
+  myFleetModalEvents();
+  $("#welcome-modal").show().dimBackground();
 }
