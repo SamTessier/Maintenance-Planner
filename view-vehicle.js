@@ -43,11 +43,10 @@ function populateViewModal(vehicleId, vehicleObject) {
     console.log(
       "Iterating WorkOrders: ",
       vehicleObject["workOrders"],
-      vehicleObject["workOrders"].entries()
+      vehicleObject["workOrders"].entries(),
+      Object.entries(vehicleObject["workOrders"])
     );
-    for (const [workOrderId, workOrderObject] of Object.entries(
-      vehicleObject["workOrders"]
-    )) {
+    for (const [workOrderId, workOrderObject] of vehicleObject["workOrders"].entries()) {
       console.log("Creating work order row: ", workOrderId, workOrderObject);
       $("tbody#work-order-table-body").append(`
         <tr> 
