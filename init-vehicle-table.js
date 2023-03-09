@@ -61,24 +61,3 @@ $(document).ready(() => {
   console.log("Website Ready");
   init();
 });
-
-// how to create a vehicle
-// vehicleId = "n1"
-// vehicleObjects.set(vehicleId, {
-//   "name": "n1",
-//   "vStatus": true
-// })
-
-// how to create a workOrder
-//get reference to the existing vehicle
-// let modifiedVehicle = vehicleObjects.get("n1")
-// let workOrders = new Map();
-// workOrder.set("workOrder1", {
-//   'Name': "w1"
-// })
-// workOrder.set("workOrder2", {
-//   'Name': "w2"
-// })
-// modifiedVehicle["workOrder"] = workOrders
-
-// vehicleObjects.set(vehicleId, modifiedVehicle)

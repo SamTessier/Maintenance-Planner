@@ -31,13 +31,16 @@
     <section class="bg-dark text-light p-5 text-center">
       <div class="container-fluid"></div>
       <button
-      id="open-view-fleet-modal"
-      type="button"
-      class="btn btn-info">
-      My Fleet
-    </button>
-
-     
+        id="open-view-fleet-modal"
+        type="button"
+        class="btn btn-info"
+        data-trigger="hover"
+        data-toggle="popover"
+        title="Popover title"
+        data-content="And here's some amazing content. It's very engaging. Right?"
+      >
+        My Fleet
+      </button>
     </section>
 
     <div
@@ -91,13 +94,15 @@
           </div>
           <div class="modal-body text-center">
             <div class="p-4">
-              <!-- <form id="frm1">
-              ID
-              <input type="text" id="add-vehicle-id" name="id" />
-              <br /> -->
-              Vehicle Name <br />
-              <input type="text" id="add-vehicle-name" />
-
+              <br /><div
+              data-trigger="hover"
+              data-toggle="popover"
+              title="Vehicle Name"
+              data-content="This is how your vehicle will appear to you. You can use any name you like - Unit 6, Cab 1, Stan's Corolla, etc."
+            >Vehicle Name</div> <input
+                type="text"
+                id="add-vehicle-name"
+              />
               <br />Year<br /><input type="text" id="add-vehicle-year" />
               <br />Make<br /><input type="text" id="add-vehicle-make" />
               <br />Model<br /><input type="text" id="add-vehicle-model" />
@@ -144,10 +149,6 @@
           </div>
           <div class="modal-body text-center" id="work-order-modal-body">
             <div class="p-4">
-              <!-- <form id="frm1">
-              ID
-              <input type="text" id="add-vehicle-id" name="id" />
-              <br /> -->
               Job Description
               <input type="text" id="work-order-job-description" />
               <br />
@@ -163,7 +164,6 @@
               >
                 Create Work Order
               </button>
-              <!-- </form> -->
               <button
                 id="close-work-order-modal"
                 type="button"
@@ -178,52 +178,41 @@
     </div>
 
     <div
-    id="view-fleet-modal"
-    class="modal container-fluid"
-    tabindex="-1"
-    role="dialog"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">My Fleet</h5>
-        </div>
-        <div class="modal-body" id="view-fleet-modal-body">
-          
-          <table class="table table-striped table-dark mt-5 container-fluid">
-            <thead>
-              <!-- <tr>
-                <th scope="col">My Fleet</th>
-                <th scope="col">Status</th>
-              </tr> -->
-            </thead>
-            <tbody id="vehicle-table-body">
-              <!--Inject rows from JQuery-->
-            </tbody>
-          </table>
-        </div>
+      id="view-fleet-modal"
+      class="modal container-fluid"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">My Fleet</h5>
+          </div>
+          <div class="modal-body" id="view-fleet-modal-body">
+            <table class="table table-striped table-dark mt-5 container-fluid">
+              <thead id="vehicle-table-header">    
+              </thead>
+              <tbody id="vehicle-table-body">
+              </tbody>
+            </table>
+          </div>
 
-        <div class="modal-footer">
+          <div class="modal-footer">
+            <button id="new-vehicle-input" type="button" class="btn btn-info">
+              Add Vehicle to Fleet
+            </button>
 
-          <button
-          id="new-vehicle-input"
-          type="button"
-          class="btn btn-info"
-          >
-          Add Vehicle to Fleet
-        </button>
-         
-          <button
-            id="close-fleet-modal-btn"
-            type="button"
-            class="btn btn-dark"
-          >
-            Close
-          </button>
+            <button
+              id="close-fleet-modal-btn"
+              type="button"
+              class="btn btn-dark"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div
       id="view-vehicle-modal"
@@ -238,7 +227,6 @@
           </div>
           <div class="modal-body">
             <ul id="view-modal-vehicle-property-list">
-              <!-- insert list entries automatically from Jquery-->
             </ul>
             <table class="table table-striped table-dark mt-5">
               <thead>
@@ -249,7 +237,6 @@
                 </tr>
               </thead>
               <tbody id="work-order-table-body">
-                <!--Inject rows from JQuery-->
               </tbody>
             </table>
           </div>
@@ -286,7 +273,6 @@
           </div>
           <div class="modal-body"></div>
           <ul id="edit-modal-vehicle-property-list">
-            <!-- insert list entries automatically from Jquery-->
           </ul>
           <div class="modal-footer">
             <button id="edit-properties-btn" type="button" class="btn btn-dark">
@@ -327,11 +313,7 @@
         </div>
       </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -342,7 +324,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script
       type="text/javascript"
       src="https://andywer.github.io/jquery-dim-background/jquery.dim-background.min.js"
@@ -357,5 +338,10 @@
     <script src="delete-vehicle.js"></script>
     <script src="work-order.js"></script>
     <script src="init-vehicle-table.js"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="popover"]').popover();
+      });
+    </script>
   </body>
 </html>

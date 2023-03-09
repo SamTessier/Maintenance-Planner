@@ -88,7 +88,6 @@ function deleteModalEvents() {
   $(`button#delete-vehicle-btn`).click(function () {
     console.log("Trying to delete object with ID: ", selectedVehicleObjectId);
     if (selectedVehicleObjectId != null) {
-      // DELETE LOGIC
       vehicleObjects.delete(selectedVehicleObjectId);
       $(`tr#vehicle-row-${selectedVehicleObjectId}`).remove();
       $("#delete-vehicle-modal").hide();
