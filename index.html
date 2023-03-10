@@ -10,6 +10,10 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
     <title>Maintenance Planner</title>
   </head>
   <body>
@@ -30,15 +34,7 @@
 
     <section class="bg-dark text-light p-5 text-center">
       <div class="container-fluid"></div>
-      <button
-        id="open-view-fleet-modal"
-        type="button"
-        class="btn btn-info"
-        data-trigger="hover"
-        data-toggle="popover"
-        title="Popover title"
-        data-content="And here's some amazing content. It's very engaging. Right?"
-      >
+      <button id="open-view-fleet-modal" type="button" class="btn btn-info">
         My Fleet
       </button>
     </section>
@@ -60,15 +56,10 @@
             equipment in order to run their business. When you enter, log each
             of your vehicles to create your fleet, and then you can start
             keeping track of any upcoming scheduled or non-scheduled service,
-            appointments, registrations, or parts to be ordered.<button
-              type="button"
-              class="btn btn-link font-weight-light"
-              id="welcome-modal-learn-more-btn"
-            >
-              Learn more
-            </button>
+            appointments, registrations, or parts to be ordered.
           </div>
           <div class="modal-footer align-content-center">
+           
             <button
               type="button"
               class="btn btn-info ml-5"
@@ -80,6 +71,8 @@
         </div>
       </div>
     </div>
+
+
 
     <div
       id="add-vehicle-modal"
@@ -94,16 +87,23 @@
           </div>
           <div class="modal-body text-center">
             <div class="p-4">
-              <br /><div
-              data-trigger="hover"
-              data-toggle="popover"
-              title="Vehicle Name"
-              data-content="This is how your vehicle will appear to you. You can use any name you like - Unit 6, Cab 1, Stan's Corolla, etc."
-            >Vehicle Name</div> <input
+              <br />
+              <div>
+                Vehicle Name<span
+                class="material-symbols-outlined"
+                data-trigger="hover"
+                data-toggle="popover"
+                data-placement="right"
+                title="Vehicle Name"
+                data-content="This is how your vehicle will appear to you. You can use any name you like - Unit 6, Cab 1, Stan's Corolla, etc.."
+              >
+                help
+              </span>
+              </div>
+              <input type="text" id="add-vehicle-name" /> <br />Year<br /><input
                 type="text"
-                id="add-vehicle-name"
+                id="add-vehicle-year"
               />
-              <br />Year<br /><input type="text" id="add-vehicle-year" />
               <br />Make<br /><input type="text" id="add-vehicle-make" />
               <br />Model<br /><input type="text" id="add-vehicle-model" />
               <br />License Plate<br /><input
@@ -112,7 +112,17 @@
               />
               <br />
               <div class="p-1">
-                Is the vehicle in service?<br />
+                Is the vehicle in service?
+                <span
+                  class="material-symbols-outlined"
+                  data-trigger="hover"
+                  data-toggle="popover"              
+                  title="In Service"
+                  data-content="This indicates whether or not the vehicle is able to be driven and used normally in its current condition. For example, a vehicle with an upcoming oil change could likely stay 'In Service', while a vehicle with flat tires would be 'Out of Service'. This will help you quickly determine the priority of work to be completed. Checking the box will indicate that the vehicle is currently 'In Service'."
+                >
+                  help
+                </span>
+                <br />
                 <input type="checkbox" id="add-vehicle-status" />
               </div>
               <br />
@@ -167,7 +177,7 @@
               <button
                 id="close-work-order-modal"
                 type="button"
-                class="btn btn-dark"
+                class="btn btn-xs btn-link text-right font-weight-light"
               >
                 Close
               </button>
@@ -190,10 +200,8 @@
           </div>
           <div class="modal-body" id="view-fleet-modal-body">
             <table class="table table-striped table-dark mt-5 container-fluid">
-              <thead id="vehicle-table-header">    
-              </thead>
-              <tbody id="vehicle-table-body">
-              </tbody>
+              <thead id="vehicle-table-header"></thead>
+              <tbody id="vehicle-table-body"></tbody>
             </table>
           </div>
 
@@ -205,7 +213,7 @@
             <button
               id="close-fleet-modal-btn"
               type="button"
-              class="btn btn-dark"
+              class="btn btn-xs btn-link text-right font-weight-light"
             >
               Close
             </button>
@@ -226,8 +234,7 @@
             <h5 class="modal-title">View Properties</h5>
           </div>
           <div class="modal-body">
-            <ul id="view-modal-vehicle-property-list">
-            </ul>
+            <ul id="view-modal-vehicle-property-list"></ul>
             <table class="table table-striped table-dark mt-5">
               <thead>
                 <tr>
@@ -236,22 +243,21 @@
                   <th scope="col">Action Required?</th>
                 </tr>
               </thead>
-              <tbody id="work-order-table-body">
-              </tbody>
+              <tbody id="work-order-table-body"></tbody>
             </table>
           </div>
           <div class="modal-footer">
             <button
               id="open-work-order-modal"
               type="button"
-              class="btn btn-dark"
+              class="btn btn-info"
             >
               Begin Work Order
             </button>
             <button
               id="close-view-modal-btn"
               type="button"
-              class="btn btn-dark"
+              class="btn btn-xs btn-link text-right font-weight-light"
             >
               Close
             </button>
@@ -272,13 +278,12 @@
             <h5 class="modal-title">Edit Properties</h5>
           </div>
           <div class="modal-body"></div>
-          <ul id="edit-modal-vehicle-property-list">
-          </ul>
+          <ul id="edit-modal-vehicle-property-list"></ul>
           <div class="modal-footer">
             <button id="edit-properties-btn" type="button" class="btn btn-dark">
               Edit Properties
             </button>
-            <button id="close-edit-modal" type="button" class="btn btn-dark">
+            <button id="close-edit-modal" type="button" class="btn btn-xs btn-link text-right font-weight-light">
               Close
             </button>
           </div>
@@ -303,10 +308,10 @@
           </div>
 
           <div class="modal-footer">
-            <button id="delete-vehicle-btn" type="button" class="btn btn-dark">
+            <button id="delete-vehicle-btn" type="button" class="btn btn-drk">
               Delete Vehicle
             </button>
-            <button id="close-delete-modal" type="button" class="btn btn-dark">
+            <button id="close-delete-modal" type="button" class="btn btn-xs btn-link text-right font-weight-light">
               Cancel
             </button>
           </div>
