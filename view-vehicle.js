@@ -56,6 +56,35 @@ function populateViewModal(vehicleId, vehicleObject) {
         </tr>
       `);
   }
+  $("div#view-vehicle-modal-footer").empty();
+  let rowHtmlStr = `
+    <button class="btn btn-danger btn-xs" id="vehicle-delete-${vehicleId}">Delete </button>
+    <button class="btn btn-info btn-xs" id="vehicle-edit-${vehicleId}">Edit Vehicle</button>
+    <button class="btn btn-info btn-xs" id="open-work-order-modal-btn">Add Work Order</button>
+    <button
+              id="close-view-modal-btn"
+              type="button"
+              class="btn btn-xs btn-link text-right font-weight-light"
+            > `;
+  $("div#view-vehicle-modal-footer").html(rowHtmlStr);
+
+  $(`button#vehicle-delete-${vehicleId}`).click(function () {
+    console.log(`Showing delete vehicle modal `, vehicleObject);
+    $("span#delete-vehicle-name").html(vehicleObject["name"]);
+    selectedVehicleObjectId = vehicleId;
+    $("#delete-vehicle-modal").show().dimBackground();
+    $("#view-vehicle-modal").hide().undim();
+  });
+
+  $(`button#vehicle-edit-${vehicleId}`).click(function () {
+    $("#view-vehicle-modal").hide().undim();
+    $("#edit-vehicle-modal").show().dimBackground();
+    console.log(
+      `opening vehicle edit `,
+      vehicleObject,
+      Object.entries(vehicleObject)
+    );
+  });
 }
 
 function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {

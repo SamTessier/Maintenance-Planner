@@ -22,8 +22,8 @@ function createWorkOrder() {
   $("input#work-order-job-description").val("");
   $("input#work-order-action-required").val("");
 
-  $("#work-order-modal").hide();
-  $("#view-vehicle-modal").show();
+  $("#work-order-modal").hide().undim();
+  $("#view-vehicle-modal").show().dimBackground();
 
   populateViewModal(vehicleId, vehicleObject);
 }
