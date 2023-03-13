@@ -1,13 +1,11 @@
-function populateViewModal(vehicleId, vehicleObject) {
+const populateViewModal = (vehicleId, vehicleObject) => {
   console.log(
     `opening vehicle row `,
     vehicleObject,
     Object.entries(vehicleObject["workOrders"])
   );
-
   $("#view-vehicle-modal").show().dimBackground();
   $("ul#view-modal-vehicle-property-list").empty();
-
   for (const [key, value] of Object.entries(vehicleObject)) {
     let displayKey = key;
     let newValue = value;
@@ -28,7 +26,6 @@ function populateViewModal(vehicleId, vehicleObject) {
         newValue = "No Work Orders Open";
       }
     }
-
     $("ul#view-modal-vehicle-property-list").append(`
         <li>
           <strong> ${displayKey} : </strong>
@@ -36,7 +33,6 @@ function populateViewModal(vehicleId, vehicleObject) {
         </li>
       `);
   }
-
   $("tbody#work-order-table-body").html("");
   console.log(
     "Iterating WorkOrders: ",
@@ -65,31 +61,39 @@ function populateViewModal(vehicleId, vehicleObject) {
               id="close-view-modal-btn"
               type="button"
               class="btn btn-xs btn-link text-right font-weight-light"
-            > `;
+            >Close</button> `;
   $("div#view-vehicle-modal-footer").html(rowHtmlStr);
-
-  $(`button#vehicle-delete-${vehicleId}`).click(function () {
+  $(`button#vehicle-delete-${vehicleId}`).click(() => {
     console.log(`Showing delete vehicle modal `, vehicleObject);
     $("span#delete-vehicle-name").html(vehicleObject["name"]);
     selectedVehicleObjectId = vehicleId;
     $("#delete-vehicle-modal").show().dimBackground();
     $("#view-vehicle-modal").hide().undim();
   });
-
-  $(`button#vehicle-edit-${vehicleId}`).click(function () {
+  $(`button#vehicle-edit-${vehicleId}`).click(() => {
     $("#view-vehicle-modal").hide().undim();
     $("#edit-vehicle-modal").show().dimBackground();
+    perRowEditPropertiesClickEvent(vehicleId, vehicleObject);
     console.log(
       `opening vehicle edit `,
       vehicleObject,
       Object.entries(vehicleObject)
     );
   });
-}
+  $("button#open-work-order-modal-btn").click(() => {
+    console.log("opening work order modal");
+    $("#view-fleet-modal").hide().undim();
+    $("#view-vehicle-modal").hide().undim();
+    $("#work-order-modal").show().dimBackground();
+  });
+  $("button#close-view-modal-btn").click(() => {
+    $("#view-vehicle-modal").hide().undim();
+  });
+};
 
-function perRowViewPropertiesClickEvent(vehicleId, vehicleObject) {
-  $(`button#vehicle-view-${vehicleObject.name}`).click(function () {
+const perRowViewPropertiesClickEvent = (vehicleId, vehicleObject) => {
+  $(`button#vehicle-view-${vehicleObject.name}`).click(() => {
     populateViewModal(vehicleId, vehicleObject);
   });
   selectedVehicleObjectId = vehicleId;
-}
+};

@@ -1,101 +1,54 @@
-function welcomeModalEvents() {
-  $("button#welcome-modal-btn").click(function () {
+const welcomeModalEvents = () => {
+  $("button#welcome-modal-btn").click(() => {
     $("#welcome-modal").hide().undim();
   });
-}
+};
 
-function myFleetModalEvents() {
-  if (vehicleObjects.size == 0) {
-    $("button#open-view-fleet-modal").click(function () {
+const myFleetModalEvents = () => {
+  $("button#open-view-fleet-modal").click(() => {
+    if (vehicleObjects.size === 0) {
       $("#add-vehicle-modal").show().dimBackground();
-    });
-    $("button#close-fleet-modal-btn").click(function () {
-      $("#view-fleet-modal").hide().undim();
-    });
-  } else {
-    $("button#open-view-fleet-modal").click(function () {
-      $("#view-fleet-modal").show().dimBackground();
-    });
-    $("button#close-fleet-modal-btn").click(function () {
-      $("#view-fleet-modal").hide().undim();
-    });
-  }
-}
-
-function editModalEvents() {
-  $("button#close-edit-modal").click(function () {
-    $("#edit-vehicle-modal").hide().undim();
-  });
-  $("#edit-properties-btn").click(function () {
-    if (selectedVehicleObjectId != null) {
-      let name = $(`input#edit-value-name`).val();
-      let vStatus = $(`input#edit-value-vStatus`).prop("checked");
-      let newVehicleObject = {};
-      newVehicleObject.name = name;
-      newVehicleObject.vStatus = vStatus;
-      newVehicleObject.workOrders =
-        vehicleObjects[selectedVehicleObjectId]["workOrders"];
-      vehicleObjects[selectedVehicleObjectId] = newVehicleObject;
-      console.log("New object appended: ", newVehicleObject, vehicleObjects);
-
-      let rowHtmlStr = `
-              <tr id="vehicle-row-${selectedVehicleObjectId}">
-                <td > ${newVehicleObject.name} </td>
-                <td >
-                    <input type="checkbox" id="vehicle-status-${newVehicleObject.name}" >
-                </td> 
-                <td> <button id="vehicle-view-${newVehicleObject.name}">View </button>
-                <!-- <td> <button id="vehicle-edit-${newVehicleObject.name}">Edit </button>
-                <td> <button id="vehicle-delete-${newVehicleObject.name}">Delete </button> -->
-              </tr>`;
-
-      $(`tr#vehicle-row-${selectedVehicleObjectId}`).replaceWith(rowHtmlStr);
-      linkCheckBox(newVehicleObject);
-      $("#edit-vehicle-modal").hide().undim();
-      $(`input#edit-value-name`).val("");
-      $(`input#edit-value-vStatus`).prop("checked", false);
-      linkCheckBox(newVehicleObject);
-      perRowViewPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
-      perRowEditPropertiesClickEvent(selectedVehicleObjectId, newVehicleObject);
-      perRowDeletePropertiesClickEvent(
-        selectedVehicleObjectId,
-        newVehicleObject
-      );
     } else {
-      alert("I couldn't find the object");
+      $("#view-fleet-modal").show().dimBackground();
     }
   });
+  $("button#close-fleet-modal-btn").click(() => {
+    $("#view-fleet-modal").hide().undim();
+  });
+};
 
-}
+const editModalEvents = () => {
+  $("button#close-edit-modal").click(() => {
+    $("#edit-vehicle-modal").hide().undim();
+  });
+  $("#edit-properties-btn").click(() => {
+    editVehicleObject();
+  });
+};
 
-function addModalEvents() {
-  $("button#close-add-modal").click(function () {
+const addModalEvents = () => {
+  $("button#close-add-modal").click(() => {
     $("#add-vehicle-modal").hide().undim();
   });
-
-  $("button#new-vehicle-input").click(function () {
+  $("button#new-vehicle-input").click(() => {
     $("#view-fleet-modal").hide().undim();
     $("#add-vehicle-modal").show().dimBackground();
   });
-
-  $("button#add-properties-btn").click(function () {
+  $("button#add-properties-btn").click(() => {
     createRowObjectEvent();
     $("#add-vehicle-modal").hide().undim();
     $("#view-fleet-modal").show().dimBackground();
   });
-}
+};
 
-function viewModalEvents() {
-  $("button#close-view-modal-btn").click(function () {
+const viewModalEvents = () => {
+  $("button#close-view-modal-btn").click(() => {
     $("#view-vehicle-modal").hide().undim();
   });
-}
+};
 
-function deleteModalEvents() {
-  $("button#close-delete-modal").click(function () {
-    $("div#delete-vehicle-modal").hide().undim();
-  });
-  $(`button#delete-vehicle-btn`).click(function () {
+const deleteModalEvents = () => {
+  $(`button#delete-vehicle-btn`).click(() => {
     console.log("Trying to delete object with ID: ", selectedVehicleObjectId);
     if (selectedVehicleObjectId != null) {
       vehicleObjects.delete(selectedVehicleObjectId);
@@ -105,24 +58,22 @@ function deleteModalEvents() {
       alert("Cannot find object to delete.");
     }
   });
-}
-
-function workOrderModalEvents() {
-  $("button#open-work-order-modal").click(function () {
-    $("#work-order-modal").show().dimBackground();
-    $("#view-fleet-modal").hide().undim();
-    $("#view-vehicle-modal").hide().undim();
+  $("button#close-delete-modal").click(() => {
+    $("div#delete-vehicle-modal").hide().undim();
   });
-  $("button#close-work-order-modal").click(function () {
+};
+
+const workOrderModalEvents = () => {
+  $("button#close-work-order-modal").click(() => {
     $("#work-order-modal").hide().undim();
   });
-  $("button#create-work-order-btn").click(function () {
+  $("button#create-work-order-btn").click(() => {
     createWorkOrder();
     $("#work-order-modal").hide().undim();
   });
-}
+};
 
-function init() {
+const init = () => {
   console.log("Initializing Events / Asynchrnous operations");
   addModalEvents();
   editModalEvents();
@@ -131,5 +82,6 @@ function init() {
   welcomeModalEvents();
   workOrderModalEvents();
   myFleetModalEvents();
+  editVehicleObject();
   $("#welcome-modal").show().dimBackground();
-}
+};
