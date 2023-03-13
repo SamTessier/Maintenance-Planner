@@ -262,22 +262,7 @@
               <tbody id="work-order-table-body"></tbody>
             </table>
           </div>
-          <div class="modal-footer" id="view-vehicle-modal-footer">
-            <!-- <button
-              id="open-work-order-modal"
-              type="button"
-              class="btn btn-info"
-            >
-              Begin Work Order
-            </button> -->
-            <!-- <button
-              id="close-view-modal-btn"
-              type="button"
-              class="btn btn-xs btn-link text-right font-weight-light"
-            > -->
-              Close
-            </button>
-          </div>
+          <div class="modal-footer" id="view-vehicle-modal-footer"></div>
         </div>
       </div>
     </div>
@@ -291,13 +276,24 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Edit Properties</h5>
+            <h5 class="modal-title">
+              Edit Properties<span
+                class="material-symbols-outlined"
+                data-trigger="hover click"
+                data-toggle="popover"
+                title="Edit Vehicle"
+                data-content="As of right now, every input feild must be filled out again to edit vehicle details. Work orders will not currently remain when a vehicle is edited."
+              >
+                info
+              </span>
+            </h5>
           </div>
-          <div class="modal-body">
-          <ul id="edit-modal-vehicle-property-list"></ul>
-        </div>
+          <div
+            class="modal-body text-center"
+            id="edit-modal-vehicle-property-list"
+          ></div>
           <div class="modal-footer">
-            <button id="edit-properties-btn" type="button" class="btn btn-dark">
+            <button id="edit-properties-btn" type="button" class="btn btn-info">
               Edit Properties
             </button>
             <button
@@ -311,7 +307,6 @@
         </div>
       </div>
     </div>
-
     <div
       id="delete-vehicle-modal"
       class="modal container-fluid"
@@ -358,7 +353,6 @@
       type="text/javascript"
       src="https://andywer.github.io/jquery-dim-background/jquery.dim-background.min.js"
     ></script>
-
     <script src="init-data.js"></script>
     <script src="init-modal-events.js"></script>
     <script src="style.css"></script>

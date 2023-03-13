@@ -1,5 +1,4 @@
-
-function createRowObjectEvent() {
+const createRowObjectEvent = () => {
 
     let vehicleObject = {};
     let name = $("input#add-vehicle-name").val();
@@ -16,17 +15,12 @@ function createRowObjectEvent() {
     vehicleObject.model = model;
     vehicleObject.year = year;
     vehicleObject.workOrders = new Map();
-    let vehicleJson = JSON.stringify(vehicleObject);
-    console.log("JSON below");
-    console.log(vehicleJson);
-
     let idList = Array.from(vehicleObjects.keys());
     let doesIdExists = idList.includes(vehicleId);
     if (doesIdExists == true) {
       alert("Repeated Vehicle Name");
       return;
     }
-
     let rowHtmlStr = `
       <tr id="vehicle-row-${vehicleId}">
         <td > ${vehicleObject.name} </td>
@@ -38,23 +32,19 @@ function createRowObjectEvent() {
         <td> <button class="btn btn-secondary btn-xs" id="vehicle-delete-${vehicleObject.name}">Delete </button> --!>
       </tr>`;
     $("#vehicle-table-body").append(rowHtmlStr);
-
     vehicleObjects.set(vehicleId, vehicleObject);
-
     console.log("Creating new object: ", vehicleObjects);
     linkCheckBox(vehicleObject);
     perRowViewPropertiesClickEvent(vehicleId, vehicleObject);
     perRowEditPropertiesClickEvent(vehicleId, vehicleObject);
     perRowDeletePropertiesClickEvent(vehicleId, vehicleObject);
     console.log("Map of vehicle objects", vehicleObjects);
-
     $("input#add-vehicle-name").val("");
     $("input#add-vehicle-status").val(null);
     $("input#add-vehicle-license-plate").val("");
     $("input#add-vehicle-make").val("");
     $("input#add-vehicle-model").val("");
     $("input#add-vehicle-year").val("");
-  
 }
 
 $(document).ready(() => {
