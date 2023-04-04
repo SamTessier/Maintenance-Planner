@@ -6,3 +6,10 @@ const perRowDeletePropertiesClickEvent = (vehicleId, vehicleObject) => {
       $("#delete-vehicle-modal").show().dimBackground();
     });
   }
+
+
+  //  ADD ICONS INDICATING STATUS AND ACTION REQUIRED
+  // TURN VIEW BUTTON INTO VEHICLE NAME
+  // VIEW BUTTON ON RIGHT, STATUS AND ACTION ICONS ON LEFT 
+  // CREATE VIEW MY WORK ORDERS BUTTON AND MODAL FOR HOME SCREEN
+  

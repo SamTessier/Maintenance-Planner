@@ -55,7 +55,7 @@ const populateViewModal = (vehicleId, vehicleObject) => {
   $("div#view-vehicle-modal-footer").empty();
   let rowHtmlStr = `
     <button class="btn btn-danger btn-xs" id="vehicle-delete-${vehicleId}">Delete </button>
-    <button class="btn btn-info btn-xs" id="vehicle-edit-${vehicleId}">Edit Vehicle</button>
+    <button class="btn-edit-xs btn-info btn-xs" id="vehicle-edit-${vehicleId}">Edit Vehicle</button>
     <button class="btn btn-info btn-xs" id="open-work-order-modal-btn">Add Work Order</button>
     <button
               id="close-view-modal-btn"
@@ -66,7 +66,7 @@ const populateViewModal = (vehicleId, vehicleObject) => {
   $(`button#vehicle-delete-${vehicleId}`).click(() => {
     console.log(`Showing delete vehicle modal `, vehicleObject);
     $("span#delete-vehicle-name").html(vehicleObject["name"]);
-    selectedVehicleObjectId = vehicleId;
+12    selectedVehicleObjectId = vehicleId;
     $("#delete-vehicle-modal").show().dimBackground();
     $("#view-vehicle-modal").hide().undim();
   });

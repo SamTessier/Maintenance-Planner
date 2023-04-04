@@ -21,14 +21,12 @@ const createRowObjectEvent = () => {
     return;
   }
   let rowHtmlStr = `
-      <tr id="vehicle-row-${vehicleId}">
-        <td > ${vehicleObject.name} </td>
-        <td >
+      <tr align="center" id="vehicle-row-${vehicleId}">
+        
+        <td align="right">
             <input type="checkbox" id="vehicle-status-${vehicleObject.name}" >
         </td> 
-        <td> <button class="btn btn-secondary btn-xs" id="vehicle-view-${vehicleObject.name}">View </button>
-        <!-- <td> <button class="btn btn-secondary btn-xs" id="vehicle-edit-${vehicleObject.name}">Edit </button>
-        <td> <button class="btn btn-secondary btn-xs" id="vehicle-delete-${vehicleObject.name}">Delete </button> --!>
+        <td align="center"> <button class="btn btn-secondary btn-xs vehicle-name-btn" id="vehicle-view-${vehicleObject.name}">${vehicleObject.name}</button>
       </tr>`;
   $("#vehicle-table-body").append(rowHtmlStr);
   vehicleObjects.set(vehicleId, vehicleObject);
